@@ -1,0 +1,838 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke; height:800px; padding-top: 50px; padding-right: 1px; padding-bottom: 50px; padding-left: 50px;" >
+
+
+
+
+
+
+
+<div class="col-xl-12">
+    <div class="tab-content" id="v-pills-tabContent">
+
+
+
+                         <div class="tab-pane fade show active" id="v-pills-JobPost" role="tabpanel" aria-labelledby="v-pills-JobPost-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+                      <h3 style="color:#1E7CCF ;"><b>Job Post</b></h3>
+                         <hr>
+
+
+
+
+
+                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#job_post">
+                                             Add Job Post Info
+                                           </button><p></p>
+
+                                           <div class="table-responsive">
+                                           <table id="job_post-table" class="table ">
+                                           <thead>
+                                           <tr>
+                                           <th>Position</th>
+                                           <th>Company</th>
+                                           <th>Status</th>
+                                           <th>Closing Date</th>
+                                               <th>Job Type</th>
+                                               <th>Job Position</th>
+                                               <th>Experience</th>
+                                               <th>Vacancy</th>
+
+
+                                           <th class="not-exported">action</th>
+                                           </tr>
+                                           </thead>
+
+
+
+
+      <tbody>
+                      {%for job_post in data37%}
+
+
+
+                          <tr>
+                          <td>{{job_post.job_title}}
+
+                          </td>
+                           <td>{{job_post.company.name}}
+
+                          </td>
+                              <td>{{job_post.status}}
+
+                          </td>
+                           <td>{{job_post.date_of_closing}}
+
+                          </td>
+                               <td>{{job_post.job_type}}
+
+                          </td>
+                               <td>{{job_post.job_category}}
+
+                          </td>
+                               <td>{{job_post.minimum_experience}}
+
+                          </td>
+                               <td>{{job_post.no_of_vacancy}}
+
+                          </td>
+
+
+
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_job_post" data-record-id="{{job_post.id}}" value="{{job_post.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_job_post" data-record-id="{{job_post.id}}" value="{{job_post.id}}" style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+
+                                           </table>
+                                           </div>
+
+
+
+
+                                           <div class="modal fade modal-dialog modal-lg modal-dialog-centered" id="job_post"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                               <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Job post</h1>
+                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                 </div>
+                                                 <div class="modal-body">
+
+                                                   <form method="job_post_code" id="job_post_sample_form" class="form-horizontal" autocomplete="off">
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+
+                                                    <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_job_post" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets-error"></span>
+    </div>
+
+                                                 <div class="col-md-6 form-group">
+                                                 <label>Job title<span class="star">*</span></label>
+                                                 <input type="text" name="job title" id="job_title" placeholder="Job Title" title="" required="" class="form-control">
+                                               </div>
+
+
+
+
+
+  <div class="col-md-6 form-group">
+
+<label>Job Type<span class="star">*</span></label>
+<select id="job_type" name="job type" class="form-control" required>
+  <option value="" disabled selected>Job Type</option>
+  <option value="Full Time">Full Time</option>
+  <option value="Part Time">Part Time</option>
+  <option value="Internship">Internship</option>
+</select>
+<span style="color:red"  class="error-message" id="job_type-error"></span>
+</div>
+
+
+
+
+
+  <div class="col-md-6 form-group">
+
+<label>Job Category<span class="star">*</span></label>
+<select id="job_category" name="job category" class="form-control" required>
+  <option value="" disabled selected>Job Category</option>
+  <option value="Team Lead">Team Lead</option>
+  <option value="Manager">Manager</option>
+  <option value="senior developer">senior developer</option>
+</select>
+<span style="color:red"  class="error-message" id="job_category-error"></span>
+</div>
+
+
+
+<div class="col-md-6 form-group">
+                                                 <label>No Of Vacancy<span class="star">*</span></label>
+                                                 <input type="text" name="no of vacancy" id="no_of_vacancy" placeholder="No Of vacancy" title="" required="" class="form-control">
+                                               </div>
+
+                                                       <div class="col-md-6 form-group">
+                                                 <label>Date Of Closing<span class="star">*</span></label>
+                                                 <input type="date" name="date of closing" id="date_of_closing" placeholder="Date Of Closing" title="" required="" class="form-control">
+                                               </div>
+
+                                                       <div class="col-md-6 form-group">
+
+<label>Gender<span class="star">*</span></label>
+<select id="gender" name="gender" class="form-control" required>
+  <option value="" disabled selected>Gender</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Others">Others</option>
+</select>
+<span style="color:red"  class="error-message" id="gender-error"></span>
+</div>
+
+
+
+                                                                                                             <div class="col-md-6 form-group">
+
+<label>Experience<span class="star">*</span></label>
+<select id="experience" name="experience" class="form-control" required>
+  <option value="" disabled selected>Experience</option>
+  <option value="Fresher">Fresher</option>
+  <option value="1-2 Years">1-2 Years</option>
+  <option value="2-5 Years">2-5 Years</option>
+  <option value="5-10 Years">2-10 Years</option>
+  <option value="10+ Years">10+ Years</option>
+</select>
+<span style="color:red"  class="error-message" id="experience-error"></span>
+</div>
+
+
+
+                                                                                                             <div class="col-md-6 form-group">
+
+<label>Is Featured</label>
+<select id="is_featured" name="is featured" class="form-control">
+  <option value="" disabled selected>Is Featured</option>
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+</select>
+<span style="color:red"  class="error-message" id="is_featured-error"></span>
+</div>
+
+
+
+                                                                                                             <div class="col-md-6 form-group">
+
+<label>Status<span class="star">*</span></label>
+<select id="status" name="status" class="form-control" required>
+  <option value="" disabled selected>Status</option>
+  <option value="Unpublished">Unpublished</option>
+  <option value="Published">Published</option>
+</select>
+<span style="color:red"  class="error-message" id="published-error"></span>
+</div>
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="job_post_action">
+                                                 <input type="hidden" name="hidden_id" id="job_post_hidden_id">
+                                                 <input type="submit" name="action_button" id="job_post_action_button" class="btn btn-warning" value="Add">
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                     </div>
+                                               </div>
+                                             </div>
+                                           </div>
+                                           </div>
+
+
+
+
+                            <div class="modal fade" id="update_job_post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+                          <form method="job_post_code" id="job_post_sample_form_upd" class="form-horizontal" autocomplete="off">
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+
+                                                    <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_job_post_upd" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets_upd-error"></span>
+    </div>
+
+                                                 <div class="col-md-6 form-group">
+                                                 <label>Job title<span class="star">*</span></label>
+                                                 <input type="text" name="job title" id="job_title_upd" placeholder="Job Title" title="" required="" class="form-control">
+                                               </div>
+
+
+
+
+
+  <div class="col-md-6 form-group">
+
+<label>Job Type<span class="star">*</span></label>
+<select id="job_type_upd" name="job type" class="form-control" required>
+  <option value="" disabled selected>Job Type</option>
+  <option value="Full Time">Full Time</option>
+  <option value="Part Time">Part Time</option>
+  <option value="Internship">Internship</option>
+</select>
+<span style="color:red"  class="error-message" id="job_type_upd-error"></span>
+</div>
+
+
+
+
+
+  <div class="col-md-6 form-group">
+
+<label>Job Category<span class="star">*</span></label>
+<select id="job_category_upd" name="job category" class="form-control" required>
+  <option value="" disabled selected>Job Category</option>
+  <option value="Team Lead">Team Lead</option>
+  <option value="Manager">Manager</option>
+  <option value="senior developer">senior developer</option>
+</select>
+<span style="color:red"  class="error-message" id="job_category_upd-error"></span>
+</div>
+
+
+
+<div class="col-md-6 form-group">
+                                                 <label>No Of Vacancy<span class="star">*</span></label>
+                                                 <input type="text" name="no of vacancy" id="no_of_vacancy_upd" placeholder="No Of vacancy" title="" required="" class="form-control">
+                                               </div>
+
+                                                       <div class="col-md-6 form-group">
+                                                 <label>Date Of Closing<span class="star">*</span></label>
+                                                 <input type="date" name="date of closing" id="date_of_closing_upd" placeholder="Date Of Closing" title="" required="" class="form-control">
+                                               </div>
+
+                                                       <div class="col-md-6 form-group">
+
+<label>Gender<span class="star">*</span></label>
+<select id="gender_upd" name="gender" class="form-control" required>
+  <option value="" disabled selected>Gender</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="Others">Others</option>
+</select>
+<span style="color:red"  class="error-message" id="gender_upd-error"></span>
+</div>
+
+
+
+                                                                                                             <div class="col-md-6 form-group">
+
+<label>Experience<span class="star">*</span></label>
+<select id="experience_upd" name="experience" class="form-control" required>
+  <option value="" disabled selected>Experience</option>
+  <option value="Fresher">Fresher</option>
+  <option value="1-2 Years">1-2 Years</option>
+  <option value="2-5 Years">2-5 Years</option>
+  <option value="5-10 Years">2-10 Years</option>
+  <option value="10+ Years">10+ Years</option>
+</select>
+<span style="color:red"  class="error-message" id="experience_upd-error"></span>
+</div>
+
+
+
+                                                                                                             <div class="col-md-6 form-group">
+
+<label>Is Featured</label>
+<select id="is_featured_upd" name="is featured" class="form-control">
+  <option value="" disabled selected>Is Featured</option>
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+</select>
+<span style="color:red"  class="error-message" id="is_featured_upd-error"></span>
+</div>
+
+
+
+                                                                                                             <div class="col-md-6 form-group">
+
+<label>Status<span class="star">*</span></label>
+<select id="status_upd" name="status" class="form-control" required>
+  <option value="" disabled selected>Status</option>
+  <option value="Unpublished">Unpublished</option>
+  <option value="Published">Published</option>
+</select>
+<span style="color:red"  class="error-message" id="published_upd-error"></span>
+</div>
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="job_post_action_upd">
+                                                 <input type="hidden" name="hidden_id" id="job_post_id">
+                                                     <button type="submit" class="btn btn-primary">Update</button>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+
+
+
+
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete_job_post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="job_post_delete_form">
+            {% csrf_token %}
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Job Post Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+                       </div></div>
+    </section>
+</main>
+
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+             $("#job_post_sample_form").submit(function(event) {
+                 event.preventDefault();
+                 var company_job_post = $("#company_job_post").val();
+                 var job_title = $("#job_title").val();
+                 var job_type = $("#job_type").val();
+                 var job_category = $("#job_category").val();
+                 var no_of_vacancy = $("#no_of_vacancy").val();
+                 var date_of_closing = $("#date_of_closing").val();
+                 var gender = $("#gender").val();
+                 var experience = $("#experience").val();
+                 var is_featured = $("#is_featured").val();
+                 var status = $("#status").val();
+
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+
+                      var form37Data = new FormData();
+                      form37Data.append('company_job_post', company_job_post);
+                      form37Data.append('job_title', job_title);
+                      form37Data.append('job_type', job_type);
+                      form37Data.append('job_category', job_category);
+                      form37Data.append('no_of_vacancy', no_of_vacancy);
+                      form37Data.append('date_of_closing', date_of_closing);
+                      form37Data.append('gender', gender);
+                      form37Data.append('experience', experience);
+                      form37Data.append('is_featured', is_featured);
+                      form37Data.append('status', status);
+
+
+
+
+
+                        form37Data.append('data_id', data_id);
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'job_post' %}",
+
+                    data:form37Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#job_post-table');
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_job_post"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#job_post_id').val(recordId);
+  })
+
+
+         $("#job_post_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+
+                var company_job_post_upd = $("#company_job_post_upd").val();
+                 var job_title_upd = $("#job_title_upd").val();
+                 var job_type_upd = $("#job_type_upd").val();
+                 var job_category_upd = $("#job_category_upd").val();
+                 var no_of_vacancy_upd = $("#no_of_vacancy_upd").val();
+                 var date_of_closing_upd = $("#date_of_closing_upd").val();
+                 var gender_upd = $("#gender_upd").val();
+                 var experience_upd = $("#experience_upd").val();
+                 var is_featured_upd = $("#is_featured_upd").val();
+                 var status_upd = $("#status_upd").val();
+
+
+
+
+                  var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+                        var recordId = $('#job_post_id').val();
+
+                      var form37Data = new FormData();
+                      form37Data.append('company_job_post_upd', company_job_post_upd);
+                      form37Data.append('job_title_upd', job_title_upd);
+                      form37Data.append('job_type_upd', job_type_upd);
+                      form37Data.append('job_category_upd', job_category_upd);
+                      form37Data.append('no_of_vacancy_upd', no_of_vacancy_upd);
+                      form37Data.append('date_of_closing_upd', date_of_closing_upd);
+                      form37Data.append('gender_upd', gender_upd);
+                      form37Data.append('experience_upd', experience_upd);
+                      form37Data.append('is_featured_upd', is_featured_upd);
+                      form37Data.append('status_upd', status_upd);
+
+
+
+
+                        form37Data.append('data_id', data_id);
+                           form37Data.append('job_post_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/update_job_post/",
+
+                    data:form37Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+<script>
+
+       $('[data-bs-target="#update_job_post"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/job_post_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#company_job_post_upd").val(response.company_job_post_upd);
+            $("#job_title_upd").val(response.job_title_upd);
+            $("#job_type_upd").val(response.job_type_upd);
+            $("#job_category_upd").val(response.job_category_upd);
+            $("#no_of_vacancy_upd").val(response.no_of_vacancy_upd);
+            $("#date_of_closing_upd").val(response.date_of_closing_upd);
+            $("#gender_upd").val(response.gender_upd);
+            $("#experience_upd").val(response.experience_upd);
+            $("#is_featured_upd").val(response.is_featured_upd);
+            $("#status_upd").val(response.status_upd);
+
+
+
+
+
+
+
+
+            $('#update_job_post').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching job post data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_job_post"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#job_post_id').val(recordId);
+  })
+
+
+         $("#job_post_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#job_post_id').val();
+
+
+                      var form37Data = new FormData();
+
+
+                           form37Data.append('job_post_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/delete_job_post/",
+
+                    data:form37Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+{%endblock%}

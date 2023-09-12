@@ -1,0 +1,39 @@
+ {%extends "hr/base.html"%}
+ {% load static %}
+ {%block content%}
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <h2 style="text-align:center;border-bottom:2px solid black;display: inline-block;margin-left: 47px;margin-top: 15px;">Employee Details</h2>
+
+<hr>
+</head><body>
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke;height:1500px;" >
+
+<p style="margin-top:50px;margin-right: 458px;"><br>
+username :{{emp_obj.user}}<br>
+Firstname:{{emp1_obj.user.first_name}}</h7>
+         Lastname:{{emp1_obj.user.last_name}}<br>
+          Email:{{emp1_obj.user.email}}<br>
+            DirthDate:{{emp_obj.BirthDate}}<br>
+              Role:{{emp_obj.Role}}</h3><br>
+              JoiningDate:{{emp_obj.JoiningDate}}<br>
+
+
+</p>
+          </div>
+        </div>
+    </section>
+</main>
+</body>
+ </html>
+{%endblock%}

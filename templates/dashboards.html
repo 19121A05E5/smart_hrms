@@ -1,0 +1,596 @@
+
+
+{%extends 'base1.html'%}
+{%load static%}
+{%block content%}
+<head>
+
+
+
+<link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css'%}">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+</head>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke;height:2000px;" >
+
+      <div class="row ml-3" >
+        <div class="col-lg-3" style="">
+
+          <div class="card" style="border: 1px solid black;border-radius:8px;background-color:#f6f9ff" >
+            <div class="card-body pt-3 d-flex flex-column align-items-center">
+
+              <img src="{{emp_data.image.url}}" alt="" class="" style=" height: 214px;width: 241px;border-radius:135px;"><br>
+                <h5 class="mt-5 text-primary "><b>{{emp_data.user|upper}}</b></h5>
+              <h5 class="mt-1 text-info "><b>{{emp_data.Role|upper}}</b></h5><br>
+
+            </div>
+          </div>
+
+        </div>
+
+          <div class="col-lg-8 mb-4" style="border: 1px solid black;border-radius: 8px;width: 870px;background-color:#f6f9ff">
+              <h6 class="mt-5"> <b> <span style="color:#6954f1;">EMPLOYEE NAME :</span> <span style="color:#403b60">{{emp_data.fullname|upper}}</span></b></h6><br>
+
+
+                 <h6><b><span style="color:#6954f1">Employee ID :</span>&nbsp;&nbsp;&nbsp;{{emp_data.EmployeeID|upper}}</b></h6><br>
+              <h6><b><span style="color:#6954f1">WORK TYPE :</span>&nbsp;&nbsp;&nbsp;{{emp_data.Worktype|upper}}</b></h6><br>
+              <h6 ><b><span style="color:#6954f1"> WORK LOCATION :</span>&nbsp;&nbsp;&nbsp;{{emp_data.WorkLocation|upper }}</b></h6><br>
+              <h6 ><b><span style="color:#6954f1">DESK NUMBER :</span>&nbsp;&nbsp;&nbsp;{{emp_data.Desk_Number|upper}}</b></h6><br>
+<div class="ml-5">
+              <button id="punch-in" {% if is_punch_in_present %}disabled{% endif %} name="action" value="Punch_In" class="btn btn-primary" style="width:110px">PunchIn</button>
+<button id="punch-out" name="action" value="Punch_Out" class="btn btn-danger" style="width:110px" disabled>PunchOut</button>
+<button id="break-in" name="action" value="Break_In" style="width:110px"  class="btn btn-info" disabled>Break In</button>
+<button id="break-out" name="action" value="Break_Out" class="btn btn-warning" style="width:110px" disabled>Break Out</button>
+          </div>
+          </div>
+
+             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-12 col-xl-12 col-xxl-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3 col-xl-3 col-xxl-3">
+              <div class="card info-card sales-card">
+
+
+
+                <div class="card-body" style="hight:250px">
+                  <h3 class="card-title" style="color:Violet;">TOTAL LEAVES  : 24 </h3>
+					<hr>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+
+                    </div>
+                    <div class="ps-3">
+                      <h6 style="color:#33FFE0  ">Casual Leaves :<span style="color:#49FF33">12</span></h6>
+						<h6 style="color:MediumSeaGreen">Sick Leaves   : <span style="color:#49FF33">12</span></h6>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+
+         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3 col-xl-3 col-xxl-3">
+               <div class="card info-card revenue-card">
+
+
+
+                <div class="card-body">
+                  <h5 class="card-title" style="color:DodgerBlue;">USED LEAVES </h5><hr>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class='far fa-building'></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6 style="color:DodgerBlue;"><b>2</b></h6>
+						<h6></h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+             </div>
+
+             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3 col-xl-3 col-xxl-3">
+               <div class="card info-card revenue-card">
+
+
+
+                <div class="card-body">
+                  <h5 class="card-title" style="color:Orange;">REMAINING LEAVES </h5><hr>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class='far fa-building'></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 style="color:Orange;"><b>22</b></h6>
+						<h6></h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+             </div>
+
+              <hr>
+
+          </div>
+
+      <div class="row p-2">
+          <div class="col-md-6 col-lg-6">
+               <div class="container">
+                      <h2><strong>Smart Calender</strong></h2>
+                 <div id="calendar" style="width:100%;"></div>
+
+                 </div>
+          </div>
+
+   <div class="col-md-6 col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Donut Chart</h5>
+
+              <!-- Donut Chart -->
+              <div id="donutChart" style="min-height: 400px;" class="echart"></div>
+
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  echarts.init(document.querySelector("#donutChart")).setOption({
+                    tooltip: {
+                      trigger: 'item'
+                    },
+                    legend: {
+                      top: '5%',
+                      left: 'center'
+                    },
+                    series: [{
+                      name: 'Access From',
+                      type: 'pie',
+                      radius: ['40%', '70%'],
+                      avoidLabelOverlap: false,
+                      label: {
+                        show: false,
+                        position: 'center'
+                      },
+                      emphasis: {
+                        label: {
+                          show: true,
+                          fontSize: '18',
+                          fontWeight: 'bold'
+                        }
+                      },
+                      labelLine: {
+                        show: false
+                      },
+                      data: [{
+                          value: 1048,
+                          name: 'Search Engine'
+                        },
+                        {
+                          value: 735,
+                          name: 'Direct'
+                        },
+                        {
+                          value: 580,
+                          name: 'Email'
+                        },
+                        {
+                          value: 484,
+                          name: 'Union Ads'
+                        },
+                        {
+                          value: 300,
+                          name: 'Video Ads'
+                        }
+                      ]
+                    }]
+                  });
+                });
+              </script>
+              <!-- End Donut Chart -->
+
+            </div>
+          </div>
+        </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row p-3">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+        <h3><strong>Birthdays</strong></h3>
+        <table class="table table-bordered table-hover mt-2 ml-1" style="width:500px;">
+    <thead class="table-primary">
+        <tr>
+            <th>Name</th>
+            <th>BirthDay</th>
+            </tr>
+    </thead><tbody>
+{%for birthday in birthdays %}
+         <tr>
+             <td>{{birthday.fullname}}</td>
+             <td>{{birthday.BirthDate}}</td>
+         </tr>
+    {%endfor%}</tbody>
+</table>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6">
+           <h3><strong>Attendence</strong></h3>
+        <table class="table table table-bordered table-hover mt-2 ml-1">
+        <thead class="table-info">
+            <tr>
+
+                <th>date </th>
+
+                <th>status</th>
+
+            </tr>  </thead>
+        <tbody>
+     {% for punch in punch_records %}
+    <tr>
+
+
+
+    {%if punch.entry_type == 'PunchIn'%}
+      {%if punch.entry_type%}
+
+
+
+         <td>{{ punch.timestamp|date }}</td>
+        <td class="badge bg-success text-white">present</td>
+        {%else%}
+          <td class="badge bg-danger text-white">absent</td></tr>
+           {%endif%}
+        {%endif%}
+       {%endfor%}
+
+
+        </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <!--<button type="submit" class ="button"  name="subject" value="PunchIn" id="punch-in-btn" style="background-color: #FF69B4;" >PunchIn</button>
+    <button type="submit" class ="button" name="subject" value="Punch_Out" id="punch-out-btn" style="background-color: #FF69B4;" >PunchOut</button>
+    <button type="submit" class ="button" name="subject"  value="Break_In"  id="break-in-btn" style="background-color: #008CBA;" >Break In</button>
+    <button type="submit"  class ="button"  name="subject"  value="Break_Out" id="break-out-btn" style="background-color:  #f4511e">Break Out</button>-->
+
+		</div>
+	</section>
+</main>
+
+
+
+
+                   <!-- Left side columns -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript" src="{% static 'js/fullcalander.js' %}"></script>
+<script>
+  $(document).ready(function () {
+
+  $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_punch_in_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                    $("#punch-in").prop("disabled", true);
+                     $("#break-in").prop("disabled", false);
+                      $("#punch-out").prop("disabled", false);
+
+                } else {
+                $("#punch-in").click(function () {
+                        // Perform the punch-in action
+                        console.log("Punch In");
+                        var action = $(this).attr("value");
+
+
+                        // Disable the "Punch In" button after clicking
+                        $(this).prop("disabled", true);
+                         $("#break-out").prop("disabled", true);
+                         $("#break-in").prop("disabled", false);
+                         $("#punch-out").prop("disabled", false);
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+             $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_break_in_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                    $("#break-in").prop("disabled", true);
+                     $("#break-out").prop("disabled", false);
+                      $("#punch-out").prop("disabled", false);
+
+                } else {
+                $("#break-in").click(function () {
+                        // Perform the punch-in action
+                        console.log("Punch In");
+                        var action = $(this).attr("value");
+
+
+                        // Disable the "Punch In" button after clicking
+                        $(this).prop("disabled", true);
+                         $("#break-out").prop("disabled",  false);
+
+                         $("#punch-out").prop("disabled", false);
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+
+             $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_break_out_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                    $("#break-out").prop("disabled", true);
+                    $("#break-in").prop("disabled", false);
+
+                      $("#punch-out").prop("disabled", false);
+
+                } else {
+                $("#break-out").click(function () {
+                        // Perform the punch-in action
+                       // console.log("Punch In");
+                        var action = $(this).attr("value");
+
+
+                        // Disable the "Punch In" button after clicking
+                        $(this).prop("disabled", true);
+                         $("#break-in").prop("disabled",  false);
+
+                         $("#punch-out").prop("disabled", false);
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+
+             $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_punch_out_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                     $("#punch-out").prop("disabled", true);
+                    $("#break-out").prop("disabled", true);
+                    $("#break-in").prop("disabled", true);
+
+                      $("#punch-in").prop("disabled",true );
+
+                } else {
+                $("#punch-out").click(function () {
+
+                        var action = $(this).attr("value");
+
+
+
+                        $(this).prop("disabled", true);
+                         $("#break-in").prop("disabled",  true);
+                         $("#break-out").prop("disabled", true);
+                          $("#punch-in").prop("disabled",true );
+
+
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+});
+</script>
+<script>
+
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        // Custom options and settings go here
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay',
+           height:'auto',
+        },
+        defaultView: 'month',
+        events: [
+          {
+            title: 'Event 1',
+            start: '2023-07-26'
+          },
+          {
+            title: 'Event 2',
+            start: '2023-07-28'
+          }
+        ],
+        // Use the dayRender callback to customize the appearance of each day cell
+        dayRender: function (date, cell) {
+          var day = date.day();
+          // 0 is Sunday, 6 is Saturday
+          if (day === 0 || day === 6) {
+            cell.css('background-color', '	#f9aeae');
+          }
+        }
+      });
+    });
+  </script>
+
+{%endblock%}

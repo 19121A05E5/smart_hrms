@@ -1,0 +1,793 @@
+
+
+{%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke;height:800px; padding-top: 50px; padding-right: 30px; padding-bottom: 50px; padding-left: 80px;" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-xl-12">
+                       <div class="tab-content" id="v-pills-tabContent">
+
+
+
+  <div class="tab-pane fade show active" id="v-pills-Assets" role="tabpanel" aria-labelledby="v-pills-Assets-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+   <h3 style="color:#1E7CCF ;"><b>Assets</b></h3>
+  <hr>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assets">
+  Add Assets
+  </button><p></p>
+
+  <div class="table-responsive">
+  <table id="assets-table" class="table ">
+  <thead>
+  <tr>
+  <th>Asset Name</th>
+  <th>Category</th>
+  <th>Company Asset Code</th>
+  <th>Is Working?</th>
+  <th>Assign To</th>
+  <th>Company</th>
+  <th>Warranty Date</th>
+  <th class="not-exported">action</th>
+  </tr>
+  </thead>
+
+
+
+                                        <tbody>
+                      {%for assets in data36%}
+
+
+
+                          <tr>
+                          <td>{{assets.asset_name}}
+
+                          </td>
+                               <td>{{assets.category.category}}
+
+                          </td>
+                               <td>{{assets.company_asset_code}}
+
+                          </td>
+                               <td>{{assets.is_working}}
+
+                          </td>
+                               <td>{{assets.employee.username}}
+
+                          </td>
+                               <td>{{assets.company.name}}
+
+                          </td>
+
+                           <td>{{assets.warranty_end_date}}
+
+                          </td>
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_assets" data-record-id="{{assets.id}}" value="{{assets.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_assets" data-record-id="{{assets.id}}" value="{{assets.id}}"  style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+  </table>
+  </div>
+
+
+
+
+  <div class="modal fade modal-dialog modal-lg modal-dialog-centered" id="assets"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h1 class="modal-title fs-5" id="exampleModalLabel">Company Policy</h1>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+
+  <form method="assets_code" id="assets_sample_form" class="form-horizontal" autocomplete="off">
+      {% csrf_token %}
+
+  <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+  <div class="row">
+
+
+
+  <div class="col-md-6 form-group">
+  <label>Asset Name<span class="star">*</span></label>
+  <input type="text" name="asset name" id="asset_name" placeholder="Asset Name" title="" required="" class="form-control">
+  </div>
+
+  <div class="col-md-6 form-group">
+  <label>Company Asset Code<span class="star">*</span></label>
+  <input type="text" name="company asset code" id="company_asset_code" placeholder="Company Asset Code" title="" required="" class="form-control">
+  </div>
+
+
+
+<div class="col-md-6 form-group">
+    <label>category<span class="star">*</span></label>
+    <select id="category" name="category" class="form-control" required>
+      <option value="" disabled selected>Category</option>
+           {% for i3 in data35 %}
+            <option value="{{ i3.id }}">{{ i3.category }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="department-error"></span>
+    </div>
+
+
+
+
+  <div class="col-md-6 form-group">
+
+<label>Is Working<span class="star">*</span></label>
+<select id="is_working" name="is working" class="form-control" required>
+  <option value="" disabled selected>Is Working</option>
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+  <option value="On Maintenance">On Maintenance</option>
+</select>
+<span style="color:red"  class="error-message" id="is_working-error"></span>
+</div>
+
+
+
+
+                                                    <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_assets" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets-error"></span>
+    </div>
+
+
+      <div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_assets" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee-error"></span>
+    </div>
+
+
+       <div class="col-md-6 form-group">
+  <label>Purchase Date<span class="star">*</span></label>
+  <input type="date" name="purchase date" id="purchase_date" placeholder="Purchase Date" title="" required="" class="form-control">
+  </div>
+
+
+      <div class="col-md-6 form-group">
+  <label>Warranty Date<span class="star">*</span></label>
+  <input type="date" name="warranty date" id="warranty_date" placeholder="Warranty Date" title="" required="" class="form-control">
+  </div>
+
+
+      <div class="col-md-6 form-group">
+  <label>Manufacturer</label>
+  <input type="text" name="manufacturer" id="manufacturer" placeholder="Manufacturer" title="" class="form-control">
+  </div>
+
+
+        <div class="col-md-6 form-group">
+  <label>Invoice Number</label>
+  <input type="number" name="invoice number" id="invoice_number" placeholder="Invoice Number" title="" class="form-control">
+  </div>
+
+
+       <div class="col-md-6 form-group">
+  <label>Serial Number</label>
+  <input type="number" name="serial number" id="serial_number" placeholder="Serial Number" title="" class="form-control">
+  </div>
+
+
+
+
+
+
+
+
+
+  <div class="container">
+  <div class="form-group" align="center">
+  <input type="hidden" name="action" id="assets_action">
+  <input type="hidden" name="hidden_id" id="assets_hidden_id">
+  <input type="submit" name="action_button" id="assets_action_button" class="btn btn-warning" value="Add">
+  </div>
+  </div>
+  </div>
+
+  </form>
+
+
+
+
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+
+
+
+                            <div class="modal fade" id="update_assets" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+  <form method="assets_code" id="assets_sample_form_upd" class="form-horizontal" autocomplete="off">
+      {% csrf_token %}
+
+  <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+  <div class="row">
+
+
+  <div class="col-md-6 form-group">
+  <label>Asset Name<span class="star">*</span></label>
+  <input type="text" name="asset name" id="asset_name_upd" placeholder="Asset Name" title="" required="" class="form-control">
+  </div>
+
+  <div class="col-md-6 form-group">
+  <label>Company Asset Code<span class="star">*</span></label>
+  <input type="text" name="company asset code" id="company_asset_code_upd" placeholder="Company Asset Code" title="" required="" class="form-control">
+  </div>
+
+
+
+<div class="col-md-6 form-group">
+    <label>category<span class="star">*</span></label>
+    <select id="category_upd" name="category" class="form-control" required>
+      <option value="" disabled selected>Category</option>
+           {% for i3 in data35 %}
+            <option value="{{ i3.id }}">{{ i3.category }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="category_upd-error"></span>
+    </div>
+
+
+
+
+  <div class="col-md-6 form-group">
+
+<label>Is Working<span class="star">*</span></label>
+<select id="is_working_upd" name="is working" class="form-control" required>
+  <option value="" disabled selected>Is Working</option>
+  <option value="Yes">Yes</option>
+  <option value="No">No</option>
+  <option value="On Maintenance">On Maintenance</option>
+</select>
+<span style="color:red"  class="error-message" id="is_working_upd-error"></span>
+</div>
+
+
+
+
+                                                    <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_assets_upd" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets_upd-error"></span>
+    </div>
+
+
+      <div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_assets_upd" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee_upd-error"></span>
+    </div>
+
+
+       <div class="col-md-6 form-group">
+  <label>Purchase Date<span class="star">*</span></label>
+  <input type="date" name="purchase date" id="purchase_date_upd" placeholder="Purchase Date" title="" required="" class="form-control">
+  </div>
+
+
+      <div class="col-md-6 form-group">
+  <label>Warranty Date<span class="star">*</span></label>
+  <input type="date" name="warranty date" id="warranty_date_upd" placeholder="Warranty Date" title="" required="" class="form-control">
+  </div>
+
+
+      <div class="col-md-6 form-group">
+  <label>Manufacturer</label>
+  <input type="text" name="manufacturer" id="manufacturer_upd" placeholder="Manufacturer" title="" class="form-control">
+  </div>
+
+
+        <div class="col-md-6 form-group">
+  <label>Invoice Number</label>
+  <input type="number" name="invoice number" id="invoice_number_upd" placeholder="Invoice Number" title="" class="form-control">
+  </div>
+
+
+       <div class="col-md-6 form-group">
+  <label>Serial Number</label>
+  <input type="number" name="serial number" id="serial_number_upd" placeholder="Serial Number" title="" class="form-control">
+  </div>
+
+
+
+
+
+  <div class="container">
+  <div class="form-group" align="center">
+  <input type="hidden" name="action" id="assets_action_upd">
+  <input type="hidden" name="hidden_id" id="assets_id">
+  <button type="submit" class="btn btn-primary">Update</button>
+  </div>
+  </div>
+  </div>
+
+  </form>
+
+
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete_assets" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="assets_delete_form">
+            {% csrf_token %}
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Assets Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+                       </div>
+</div>
+          </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+            $("#assets_sample_form").submit(function(event) {
+                event.preventDefault();
+                var asset_name = $("#asset_name").val();
+                var company_asset_code = $("#company_asset_code").val();
+                 var category = $("#category").val();
+                 var is_working = $("#is_working").val();
+                 var company_assets = $("#company_assets").val();
+                 var employee_assets = $("#employee_assets").val();
+                 var purchase_date = $("#purchase_date").val();
+                 var warranty_date = $("#warranty_date").val();
+                 var manufacturer = $("#manufacturer").val();
+                 var invoice_number = $("#invoice_number").val();
+                 var serial_number = $("#serial_number").val();
+
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+
+                      var form36Data = new FormData();
+                      form36Data.append('asset_name', asset_name);
+                      form36Data.append('company_asset_code', company_asset_code);
+                        form36Data.append('category', category);
+                        form36Data.append('is_working', is_working);
+                        form36Data.append('company_assets', company_assets);
+                        form36Data.append('employee_assets', employee_assets);
+                        form36Data.append('purchase_date', purchase_date);
+                        form36Data.append('warranty_date', warranty_date);
+                        form36Data.append('manufacturer', manufacturer);
+                        form36Data.append('invoice_number', invoice_number);
+                        form36Data.append('serial_number', serial_number);
+
+
+
+
+
+                        form36Data.append('data_id', data_id);
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'assets' %}",
+
+                    data:form36Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#assets-table');
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_assets"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#assets_id').val(recordId);
+  })
+
+
+         $("#assets_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+                 var asset_name_upd = $("#asset_name_upd").val();
+                var company_asset_code_upd = $("#company_asset_code_upd").val();
+                 var category_upd = $("#category_upd").val();
+                 var is_working_upd = $("#is_working_upd").val();
+                 var company_assets_upd = $("#company_assets_upd").val();
+                 var employee_assets_upd = $("#employee_assets_upd").val();
+                 var purchase_date_upd = $("#purchase_date_upd").val();
+                 var warranty_date_upd = $("#warranty_date_upd").val();
+                 var manufacturer_upd = $("#manufacturer_upd").val();
+                 var invoice_number_upd = $("#invoice_number_upd").val();
+                 var serial_number_upd = $("#serial_number_upd").val();
+
+
+
+                  var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+                        var recordId = $('#assets_id').val();
+
+                      var form36Data = new FormData();
+                       form36Data.append('asset_name_upd', asset_name_upd);
+                      form36Data.append('company_asset_code_upd', company_asset_code_upd);
+                        form36Data.append('category_upd', category_upd);
+                        form36Data.append('is_working_upd', is_working_upd);
+                        form36Data.append('company_assets_upd', company_assets_upd);
+                        form36Data.append('employee_assets_upd', employee_assets_upd);
+                        form36Data.append('purchase_date_upd', purchase_date_upd);
+                        form36Data.append('warranty_date_upd', warranty_date_upd);
+                        form36Data.append('manufacturer_upd', manufacturer_upd);
+                        form36Data.append('invoice_number_upd', invoice_number_upd);
+                        form36Data.append('serial_number_upd', serial_number_upd);
+
+
+
+
+
+                        form36Data.append('data_id', data_id);
+                           form36Data.append('assets_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/update_assets/",
+
+                    data:form36Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+
+<script>
+
+       $('[data-bs-target="#update_assets"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/assets_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#asset_name_upd").val(response.asset_name_upd);
+            $("#company_asset_code_upd").val(response.company_asset_code_upd);
+            $("#category_upd").val(response.category_upd);
+            $("#is_working_upd").val(response.is_working_upd);
+            $("#company_assets_upd").val(response.company_assets_upd);
+            $("#employee_assets_upd").val(response.employee_assets_upd);
+            $("#purchase_date_upd").val(response.purchase_date_upd);
+            $("#warranty_date_upd").val(response.warranty_date_upd);
+            $("#manufacturer_upd").val(response.manufacturer_upd);
+            $("#invoice_number_upd").val(response.invoice_number_upd);
+            $("#serial_number_upd").val(response.serial_number_upd);
+
+
+
+
+
+
+
+            $('#update_assets').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching assets data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_assets"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#assets_id').val(recordId);
+  })
+
+
+         $("#assets_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#assets_id').val();
+
+
+                      var form36Data = new FormData();
+
+
+                           form36Data.append('assets_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/delete_assets/",
+
+                    data:form36Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,847 @@
+
+
+{%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke;height:800px; padding-top: 50px; padding-right: 30px; padding-bottom: 50px; padding-left: 80px;" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-xl-12">
+                       <div class="tab-content" id="v-pills-tabContent">
+
+
+
+  <div class="tab-pane fade show active" id="v-pills-Assets" role="tabpanel" aria-labelledby="v-pills-Assets-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+   <h3 style="color:#1E7CCF ;"><b>Tasks</b></h3>
+  <hr>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tasks">
+  Add Tasks
+  </button>
+
+
+
+
+
+  <div class="modal fade modal-dialog modal-lg " id="tasks"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+  <div class="modal-header">
+  <h1 class="modal-title fs-5" id="exampleModalLabel">Tasks</h1>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+
+  <form method="taks_create" id="tasks_sample_form" class="form-horizontal" autocomplete="off">
+      {% csrf_token %}
+
+  <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+  <div class="row">
+
+
+
+  <div class="col-md-6 form-group">
+  <label>Task Title<span class="star">*</span></label>
+  <input type="text" name="task_title" id="task_title" placeholder="Task title" title="" required="" class="form-control">
+  </div>
+
+
+
+
+
+<div class="col-md-6 form-group">
+    <label>Client<span class="star">*</span></label>
+    <select id="client" name="client" class="form-control" required>
+      <option value="" disabled selected>Clients</option>
+        {% for client in clients %}
+            <option value="{{ client.id }}">{{client.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets_upd-error"></span>
+    </div>
+
+
+                                                    <div class="col-md-6 form-group">
+    <label>Projects<span class="star">*</span></label>
+    <select id="projects" name="projects" class="form-control" required>
+      <option value="" disabled selected>Projects</option>
+        {% for project in projects %}
+            <option value="{{ project.id }}">{{ project.title }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets-error"></span>
+    </div>
+
+
+  <div class="col-md-6 form-group">
+   <label>Priority<span class="star">*</span></label>
+  <select name="Priority" id="Priority" class="form-control" required>
+<option value="" disabled selected>Priority</option>
+<option value="Low">Low</option>
+     <option value="Medium">Medium</option>
+       <option value="High">High</option>
+
+               </select>
+
+     </div>
+
+
+<div class="col-md-6 form-group">
+<label>Start Date<span class="star">*</span></label>
+<input type="date" name="start_date" id="start_date" placeholder="" title="" required="" class="form-control">
+</div>
+ <div class="col-md-6 form-group">
+<label>End Date<span class="star">*</span></label>
+<input type="date" name="end_date" id="end_date" placeholder="" title="" required="" class="form-control">
+</div>
+
+
+<div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for company in camp %}
+            <option value="{{company.id }}">{{company.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets_upd-error"></span>
+    </div>
+
+
+<div class="col-md-6 form-group">
+     <label>Employees<span class="star">*</span></label>
+   <select name="employees[]" id="employees" multiple="multiple">
+    {% for emps in employees %}
+            <option value="{{ emps.id }}" style="width:300px;">{{emps.username }}</option>
+        {% endfor %}
+
+</select>  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="col-md-6 form-group">
+  <label>Description<span class="star">*</span></label>
+  <input type="text" name="description" id="description" placeholder="description" title="" required="" class="form-control">
+  </div>
+
+
+  <div class="col-md-6 form-group">
+  <label>Progress<span class="star">*</span></label>
+  <input type="text" name="progress" id="progress" placeholder="Progress" title="" required="" class="form-control">
+  </div>
+
+
+
+
+
+
+
+
+
+  <div class="container">
+  <div class="form-group" align="center">
+  <input type="hidden" name="action" id="assets_action">
+  <input type="hidden" name="hidden_id" id="assets_hidden_id">
+  <input type="submit" name="action_button" id="assets_action_button" class="btn btn-warning" value="Add">
+  </div>
+  </div>
+  </div>
+
+  </form>
+
+
+
+
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+
+
+  <div class="table-responsive">
+  <table id="assets-table" class="table ">
+  <thead>
+  <tr>
+  <th>Task Title</th>
+       <th>Projects</th>
+      <th>Client</th>
+      <th>Company</th>
+  <th>Start Date</th>
+  <th>End Date</th>
+
+  <th>Employees</th>
+  <th>Description</th>
+
+      <th>Progress</th>
+      <th>priority</th>
+
+  <th class="not-exported">action</th>
+  </tr>
+  </thead>
+
+
+
+                                        <tbody>
+                      {%for task in all_tasks_with_employees%}
+
+
+
+                          <tr>
+                          <td>{{task.title}}
+                              <td>{{task.project.title}}
+
+                          </td>
+                              <td>{{task.client.name}}
+
+                          </td>
+                              <td>{{task.company.name}}
+
+                          </td>
+
+                          </td>
+                               <td>{{task.start_date}}
+
+                          </td>
+                               <td>{{task.end_date}}
+
+                          </td>
+
+                                 <td>
+                                    <ul>
+
+                                {% for emps in task.employees.all %}
+                                    <li>{{emps.username }}</li>
+                                {% endfor %}
+                                 </ul>
+                    </td>
+                               <td>{{task.description}}
+
+                          </td><td>
+                              {{task.Progress}}</td>
+                              <td>
+                              {{task.priority}}</td>
+
+
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_tasks" data-record-id="{{task.id}}" value="{{task.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_tasks" data-record-id="{{task.id}}" value="{{task.id}}"  style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+  </table>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="update_tasks" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+   <form method="taks_create" id="tasks_sample_form_upd" class="form-horizontal" autocomplete="off">
+      {% csrf_token %}
+
+  <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+  <div class="row">
+
+
+
+  <div class="col-md-6 form-group">
+  <label>Task Title<span class="star">*</span></label>
+  <input type="text" name="task_title_upd" id="task_title_upd" placeholder="Task title" title="" required="" class="form-control">
+  </div>
+
+
+
+
+
+<div class="col-md-6 form-group">
+    <label>Client<span class="star">*</span></label>
+    <select id="client_upd" name="client_upd" class="form-control" required>
+      <option value="" disabled selected>Clients</option>
+        {% for client in clients %}
+            <option value="{{ client.id }}">{{client.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets_upd-error"></span>
+    </div>
+
+
+                                                    <div class="col-md-6 form-group">
+    <label>Projects<span class="star">*</span></label>
+    <select id="projects_upd" name="projects_upd" class="form-control" required>
+      <option value="" disabled selected>Projects</option>
+        {% for project in projects %}
+            <option value="{{ project.id }}">{{ project.title }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets-error"></span>
+    </div>
+
+
+  <div class="col-md-6 form-group">
+   <label>Priority<span class="star">*</span></label>
+  <select name="Priority_upd" id="Priority_upd" class="form-control" required>
+<option value="" disabled selected>Priority</option>
+<option value="Low">Low</option>
+     <option value="Medium">Medium</option>
+       <option value="High">High</option>
+
+               </select>
+
+     </div>
+
+
+<div class="col-md-6 form-group">
+<label>Start Date<span class="star">*</span></label>
+<input type="date" name="start_date_upd" id="start_date_upd" placeholder="" title="" required="" class="form-control">
+</div>
+ <div class="col-md-6 form-group">
+<label>End Date<span class="star">*</span></label>
+<input type="date" name="end_date_upd" id="end_date_upd" placeholder="" title="" required="" class="form-control">
+</div>
+
+
+<div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_upd" name="company_upd" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for company in camp %}
+            <option value="{{company.id }}">{{company.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_assets_upd-error"></span>
+    </div>
+
+
+<div class="col-md-6 form-group">
+     <label>Employees<span class="star">*</span></label>
+   <select name="employees_upd[]" id="employees_upd" multiple="multiple">
+    {% for emps in employees %}
+            <option value="{{ emps.id }}" style="width:300px;">{{emps.username }}</option>
+        {% endfor %}
+
+</select>  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="col-md-6 form-group">
+  <label>Description<span class="star">*</span></label>
+  <input type="text" name="description_upd" id="description_upd" placeholder="description" title="" required="" class="form-control">
+  </div>
+
+
+  <div class="col-md-6 form-group">
+  <label>Progress<span class="star">*</span></label>
+  <input type="text" name="progress_upd" id="progress_upd" placeholder="Progress" title="" required="" class="form-control">
+  </div>
+
+
+
+  <div class="container">
+  <div class="form-group" align="center">
+  <input type="hidden" name="action" id="task_id">
+  <input type="hidden" name="hidden_id" id="task_id">
+  <button type="submit" class="btn btn-primary">Update</button>
+  </div>
+  </div>
+  </div>
+
+  </form>
+
+
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete_tasks" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="tasks_delete_form">
+            {% csrf_token %}
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Task Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+         <input type="hidden" name="hidden_id" id="task_id">
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+                       </div>
+</div>
+          </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+            $("#tasks_sample_form").submit(function(event) {
+                event.preventDefault();
+                var task_title = $("#task_title").val();
+                var client = $("#client").val();
+                 var projects = $("#projects").val();
+                 var Priority = $("#Priority").val();
+                 var start_date = $("#start_date").val();
+                 var end_date = $("#end_date").val();
+                 var company = $("#company").val();
+
+                    var employees =$("#employees").val();
+                 var description = $("#description").val();
+                 var progress = $("#progress").val();
+                 console.log(employees)
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+                      var form36Data = new FormData();
+                      form36Data.append('task_title', task_title);
+                      form36Data.append('client', client);
+                        form36Data.append('projects', projects);
+                        form36Data.append('Priority', Priority);
+                        form36Data.append('start_date', start_date);
+                           form36Data.append('company', company);
+
+
+                        form36Data.append('end_date', end_date);
+                        form36Data.append('employees', employees);
+                        form36Data.append('description', description);
+                        form36Data.append('progress', progress);
+
+
+
+
+
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'add_tasks' %}",
+
+                    data:form36Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  created successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#assets-table');
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_tasks"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#task_id').val(recordId);
+  })
+
+
+         $("#tasks_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+                  var task_title_upd = $("#task_title_upd").val();
+                var client_upd = $("#client_upd").val();
+                 var projects_upd = $("#projects_upd").val();
+                 var Priority_upd = $("#Priority_upd").val();
+                 var start_date_upd = $("#start_date_upd").val();
+                 var end_date_upd = $("#end_date_upd").val();
+                 var company_upd = $("#company_upd").val();
+                    var employees_upd =$('#employees_upd').val();
+                 var description_upd = $("#description_upd").val();
+                 var progress_upd = $("#progress_upd").val();
+
+
+
+
+
+                        var recordId = $('#task_id').val();
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+                      var form36Data = new FormData();
+                      form36Data.append('task_title_upd', task_title_upd);
+                      form36Data.append('client_upd', client_upd);
+                        form36Data.append('projects_upd', projects_upd);
+                        form36Data.append('Priority_upd', Priority_upd);
+                        form36Data.append('start_date_upd', start_date_upd);
+                           form36Data.append('end_date_upd', end_date_upd);
+
+
+                        form36Data.append('company_upd', company_upd);
+                        form36Data.append('employees_upd', employees_upd);
+                        form36Data.append('description_upd', description_upd);
+                        form36Data.append('progress_upd', progress_upd);
+                           form36Data.append('task_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url:"{%url 'update_tasks'%}",
+
+                    data:form36Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+
+<script>
+
+       $('[data-bs-target="#update_assets"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/assets_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#asset_name_upd").val(response.asset_name_upd);
+            $("#company_asset_code_upd").val(response.company_asset_code_upd);
+            $("#category_upd").val(response.category_upd);
+            $("#is_working_upd").val(response.is_working_upd);
+            $("#company_assets_upd").val(response.company_assets_upd);
+            $("#employee_assets_upd").val(response.employee_assets_upd);
+            $("#purchase_date_upd").val(response.purchase_date_upd);
+            $("#warranty_date_upd").val(response.warranty_date_upd);
+            $("#manufacturer_upd").val(response.manufacturer_upd);
+            $("#invoice_number_upd").val(response.invoice_number_upd);
+            $("#serial_number_upd").val(response.serial_number_upd);
+
+
+
+
+
+
+
+            $('#update_assets').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching assets data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_tasks"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#task_id').val(recordId);
+  })
+
+
+         $("#tasks_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#task_id').val();
+
+
+                      var form36Data = new FormData();
+
+
+                           form36Data.append('task_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{%url 'delete_tasks'%}",
+
+                    data:form36Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+-->
+
+
+
+
+{%endblock%}

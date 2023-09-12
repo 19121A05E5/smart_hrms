@@ -1,0 +1,693 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke; height:800px; padding-top: 50px; padding-right: 1px; padding-bottom: 50px; padding-left: 50px;" >
+
+
+
+
+
+
+
+
+              <div class="col-xl-12">
+                       <div class="tab-content" id="v-pills-tabContent">
+
+
+
+                         <div class="tab-pane fade show active" id="v-pills-Terminations" role="tabpanel" aria-labelledby="v-pills-Terminations-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+                       <h3 style="color:#1E7CCF ;"><b>Terminations</b></h3>
+                         <hr>
+
+
+
+
+
+                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#terminations">
+                                             Add Terminations Info
+                                           </button><p></p>
+
+                                           <div class="table-responsive">
+                                           <table id="terminations-table" class="table ">
+                                           <thead>
+                                           <tr>
+                                           <th>Employee</th>
+                                           <th>Company</th>
+                                           <th>Termination Date</th>
+                                           <th>Notice Date</th>
+                                           <th class="not-exported">action</th>
+                                           </tr>
+                                           </thead>
+
+
+
+
+      <tbody>
+                      {%for terminations in data29%}
+
+
+
+                          <tr>
+                          <td>{{terminations.employee.username}}
+
+                          </td>
+                           <td>{{terminations.company.name}}
+
+                          </td>
+                              <td>{{terminations.termination_date}}
+
+                          </td>
+                           <td>{{terminations.notice_date}}
+
+                          </td>
+
+
+
+
+
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_terminations" data-record-id="{{terminations.id}}" value="{{terminations.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_terminations" data-record-id="{{terminations.id}}" value="{{terminations.id}}" style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+
+                                           </table>
+                                           </div>
+
+
+
+
+                                           <div class="modal fade modal-dialog modal-lg modal-dialog-centered" id="terminations"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                               <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Terminations</h1>
+                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                 </div>
+                                                 <div class="modal-body">
+
+                                                   <form method="post" id="terminations_sample_form" class="form-horizontal" autocomplete="off">
+                                                       {% csrf_token %}
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+                                                  <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_terminations" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country-error"></span>
+    </div>
+
+
+<div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_terminations" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee-error"></span>
+    </div>
+
+
+
+  <div class="col-md-6 form-group">
+                                <label>Termination Type<span class="star">*</span></label>
+                                <select id="termination_type" name="Termination type" class="form-control" required>
+                                  <option value="" disabled selected>Termination Type</option>
+                                   <option value="Voluntery Termination">Voluntery Termination</option>
+                                   <option value="Performance Termination">Performance Termination</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="termination_type-error"></span>
+                                </div>
+
+
+
+  <div class="col-md-6 form-group">
+                                               <label>Description</label>
+                                               <input type="text" name="description" id="description_terminations" placeholder="Description" title="" class="form-control">
+                                             </div>
+
+
+
+                                                        <div class="col-md-6 form-group">
+                                               <label>Termination Date<span class="star">*</span></label>
+                                               <input type="date" name="termination date" id="termination_date" placeholder="Termination Date" title="" required="" class="form-control">
+                                             </div>
+
+
+                                                        <div class="col-md-6 form-group">
+                                               <label>Notice Date<span class="star">*</span></label>
+                                               <input type="date" name="notice date" id="notice_date" placeholder="Notice Date" title="" required="" class="form-control">
+                                             </div>
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="terminations_action">
+                                                 <input type="hidden" name="hidden_id" id="terminations_hidden_id">
+                                                 <input type="submit" name="action_button" id="terminations_action_button" class="btn btn-warning" value="Add">
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                     </div>
+                                               </div>
+                                             </div>
+                                           </div>
+                                           </div>
+
+
+
+
+
+                             <div class="modal fade" id="update_terminations" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<form method="post" id="terminations_sample_form_upd" class="form-horizontal" autocomplete="off">
+                                                       {% csrf_token %}
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+                                                  <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_terminations_upd" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_upd-error"></span>
+    </div>
+
+
+<div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_terminations_upd" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee_upd-error"></span>
+    </div>
+
+
+
+  <div class="col-md-6 form-group">
+                                <label>Termination Type<span class="star">*</span></label>
+                                <select id="termination_type_upd" name="Termination type" class="form-control" required>
+                                  <option value="" disabled selected>Termination Type</option>
+                                   <option value="Voluntery Termination">Voluntery Termination</option>
+                                   <option value="Performance Termination">Performance Termination</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="termination_type_upd-error"></span>
+                                </div>
+
+
+
+  <div class="col-md-6 form-group">
+                                               <label>Description</label>
+                                               <input type="text" name="description" id="description_terminations_upd" placeholder="Description" title="" class="form-control">
+                                             </div>
+
+
+
+                                                        <div class="col-md-6 form-group">
+                                               <label>Termination Date<span class="star">*</span></label>
+                                               <input type="date" name="termination date" id="termination_date_upd" placeholder="Termination Date" title="" required="" class="form-control">
+                                             </div>
+
+
+                                                        <div class="col-md-6 form-group">
+                                               <label>Notice Date<span class="star">*</span></label>
+                                               <input type="date" name="notice date" id="notice_date_upd" placeholder="Notice Date" title="" required="" class="form-control">
+                                             </div>
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="terminations_action_upd">
+                                                 <input type="hidden" name="hidden_id" id="terminations_id">
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+                                                 </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+                           <div class="modal fade" id="delete_terminations" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="terminations_delete_form">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Terminations Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+                       </div>
+</div>
+          </div>
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+             $("#terminations_sample_form").submit(function(event) {
+                 event.preventDefault();
+
+                 var company_terminations = $("#company_terminations").val();
+                 var employee_terminations = $("#employee_terminations").val();
+                 var termination_type = $("#termination_type").val();
+                 var description_terminations = $("#description_terminations").val();
+                 var termination_date = $("#termination_date").val();
+                 var notice_date = $("#notice_date").val();
+
+
+
+
+
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+
+                      var form29Data = new FormData();
+                      form29Data.append('company_terminations', company_terminations);
+                      form29Data.append('employee_terminations', employee_terminations);
+                      form29Data.append('termination_type', termination_type);
+                      form29Data.append('description_terminations', description_terminations);
+                      form29Data.append('termination_date', termination_date);
+                      form29Data.append('notice_date', notice_date);
+
+
+
+
+
+
+
+                        form29Data.append('data_id', data_id);
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'terminations' %}",
+
+                    data:form29Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#terminations-table');
+ </script>
+
+
+
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_terminations"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#terminations_id').val(recordId);
+  })
+
+
+         $("#terminations_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+                var company_terminations_upd = $("#company_terminations_upd").val();
+                var employee_terminations_upd = $("#employee_terminations_upd").val();
+                var termination_type_upd  = $("#termination_type_upd ").val();
+                var description_terminations_upd = $("#description_terminations_upd").val();
+                var termination_date_upd = $("#termination_date_upd").val();
+                var notice_date_upd  = $("#notice_date_upd ").val();
+
+
+
+
+                  var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+                        var recordId = $('#terminations_id').val();
+
+                      var form29Data = new FormData();
+                      form29Data.append('company_terminations_upd', company_terminations_upd);
+                      form29Data.append('employee_terminations_upd', employee_terminations_upd);
+                        form29Data.append('termination_type_upd', termination_type_upd);
+                        form29Data.append('description_terminations_upd', description_terminations_upd);
+                      form29Data.append('termination_date_upd', termination_date_upd);
+                        form29Data.append('notice_date_upd', notice_date_upd);
+
+
+
+                           form29Data.append('terminations_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/update_terminations/",
+
+                    data:form29Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+<script>
+
+       $('[data-bs-target="#update_terminations"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/terminations_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#company_terminations_upd").val(response.company_terminations_upd);
+            $("#employee_terminations_upd").val(response.employee_terminations_upd);
+            $("#termination_type_upd").val(response.termination_type_upd);
+            $("#description_terminations_upd").val(response.description_terminations_upd);
+            $("#termination_date_upd").val(response.termination_date_upd);
+            $("#notice_date_upd").val(response.notice_date_upd);
+
+
+
+
+
+
+            $('#update_terminations').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching terminations data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_terminations"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#terminations_id').val(recordId);
+  })
+
+
+         $("#terminations_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#terminations_id').val();
+
+
+                      var form29Data = new FormData();
+
+
+                           form29Data.append('terminations_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/delete_terminations/",
+
+                    data:form29Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

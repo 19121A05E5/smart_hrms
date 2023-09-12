@@ -1,0 +1,302 @@
+
+
+{%extends 'base1.html'%}
+
+{%block content%}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="height:1000px width:500px">
+
+      <div class="row">
+        <div class="col-xl-3">
+
+          <div class="card" style="height:300px;">
+            <div class="card-body pt-3 d-flex flex-column align-items-center">
+
+              <img src="{{emp_data.image.url}}" alt="" class="" style=" height: 214px;width: 241px;"><br>
+                <h5 class="mt-5 text-primary ">{{emp_data.user|upper}}</h5>
+              <h5 class="mt-1 text-info ">{{emp_data.Role|upper}}</h5><br>
+
+            </div>
+          </div>
+
+        </div>
+
+          <div class="col-lg-8">
+            <h6 > <b> <span style="color:green">EMPLOYEE NAME :</span> {{emp_data.fullname|upper}}</b></h6><br>
+
+
+                 <h6><b><span style="color:green">Employee ID :</span>&nbsp;&nbsp;&nbsp;{{emp_data.EmployeeID|upper}}</b></h6><br>
+              <h6><b><span style="color:green">WORK TYPE :</span>&nbsp;&nbsp;&nbsp;{{emp_data.Worktype|upper}}</b></h6><br>
+              <h6 ><b><span style="color:green"> WORK LOCATION :</span>&nbsp;&nbsp;&nbsp;{{emp_data.WorkLocation|upper }}</b></h6><br>
+              <h6 ><b><span style="color:green">DESK NUMBER :</span>&nbsp;&nbsp;&nbsp;{{emp_data.Desk_Number|upper}}</b></h6><br>
+
+              <button id="punch-in" {% if is_punch_in_present %}disabled{% endif %} name="action" value="Punch_In" class="btn btn-primary" style="width:110px">PunchIn</button>
+<button id="punch-out" name="action" value="Punch_Out" class="btn btn-danger" style="width:110px" disabled>PunchOut</button>
+<button id="break-in" name="action" value="Break_In" style="width:110px"  class="btn btn-info" disabled>Break In</button>
+<button id="break-out" name="action" value="Break_Out" class="btn btn-warning" style="width:110px" disabled>Break Out</button>
+          </div>
+
+        </div><br>
+              <br>
+
+
+
+
+    <!--<button type="submit" class ="button"  name="subject" value="PunchIn" id="punch-in-btn" style="background-color: #FF69B4;" >PunchIn</button>
+    <button type="submit" class ="button" name="subject" value="Punch_Out" id="punch-out-btn" style="background-color: #FF69B4;" >PunchOut</button>
+    <button type="submit" class ="button" name="subject"  value="Break_In"  id="break-in-btn" style="background-color: #008CBA;" >Break In</button>
+    <button type="submit"  class ="button"  name="subject"  value="Break_Out" id="break-out-btn" style="background-color:  #f4511e">Break Out</button>-->
+
+		</div>
+	</section>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+
+  $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_punch_in_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                    $("#punch-in").prop("disabled", true);
+                     $("#break-in").prop("disabled", false);
+                      $("#punch-out").prop("disabled", false);
+
+                } else {
+                $("#punch-in").click(function () {
+                        // Perform the punch-in action
+                        console.log("Punch In");
+                        var action = $(this).attr("value");
+
+
+                        // Disable the "Punch In" button after clicking
+                        $(this).prop("disabled", true);
+                         $("#break-out").prop("disabled", true);
+                         $("#break-in").prop("disabled", false);
+                         $("#punch-out").prop("disabled", false);
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+             $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_break_in_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                    $("#break-in").prop("disabled", true);
+                     $("#break-out").prop("disabled", false);
+                      $("#punch-out").prop("disabled", false);
+
+                } else {
+                $("#break-in").click(function () {
+                        // Perform the punch-in action
+                        console.log("Punch In");
+                        var action = $(this).attr("value");
+
+
+                        // Disable the "Punch In" button after clicking
+                        $(this).prop("disabled", true);
+                         $("#break-out").prop("disabled",  false);
+
+                         $("#punch-out").prop("disabled", false);
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+
+             $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_break_out_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                    $("#break-out").prop("disabled", true);
+                    $("#break-in").prop("disabled", false);
+
+                      $("#punch-out").prop("disabled", false);
+
+                } else {
+                $("#break-out").click(function () {
+                        // Perform the punch-in action
+                       // console.log("Punch In");
+                        var action = $(this).attr("value");
+
+
+                        // Disable the "Punch In" button after clicking
+                        $(this).prop("disabled", true);
+                         $("#break-in").prop("disabled",  false);
+
+                         $("#punch-out").prop("disabled", false);
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+
+             $.get("{% url 'punch_in' %}", function (data) {
+                if (data.is_punch_out_present) {
+                    // If punch-in data is present, disable the "Punch In" button
+                     $("#punch-out").prop("disabled", true);
+                    $("#break-out").prop("disabled", true);
+                    $("#break-in").prop("disabled", true);
+
+                      $("#punch-in").prop("disabled",true );
+
+                } else {
+                $("#punch-out").click(function () {
+                        // Perform the punch-in action
+                       // console.log("Punch In");
+                        var action = $(this).attr("value");
+
+
+                        // Disable the "Punch In" button after clicking
+                        $(this).prop("disabled", true);
+                         $("#break-in").prop("disabled",  false);
+                         $("#break-out").prop("disabled", true);
+                          $("#punch-in").prop("disabled",true );
+
+                         $("#punch-out").prop("disabled", false);
+                         $.ajax({
+                                  type: "POST",
+                                   url: "{% url 'punch' %}",  // Replace 'process_action' with your Django view URL
+                                   data: {
+                                           action: action,
+                                          },
+                                   success: function (response) {
+                                   // Handle the server response (if needed)
+                                   console.log("Action processed successfully!");
+                                    },
+                                    error: function (xhr, status, error) {
+                                   // Handle errors (if any)
+                                   console.error("Error processing the action:", error);
+                                    },
+                                    });
+
+
+
+                    });
+
+
+
+                }
+            });
+
+
+});
+</script>
+{%endblock%}

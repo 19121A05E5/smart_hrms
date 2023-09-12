@@ -1,0 +1,17 @@
+<!-- registration_form.html -->
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label >Username:</label>
+    {{ form.username }}
+    {% if form.username.errors %}
+      <ul class="errorlist">
+        {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+  <!-- Include other fields similarly -->
+  <button type="submit">Register</button>
+</form>

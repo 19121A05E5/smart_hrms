@@ -1,0 +1,269 @@
+<form id="my-form" method="post">
+  {% csrf_token %}
+  <div>
+    <label for="id_fullname">Full Name:</label>
+    <input type="text" id="id_fullname" name="fullname" required pattern="[A-Za-z\s]+" title="Full Name should contain only characters (no numbers or special characters)">
+    <span  style="color:red" class="error-message" id="fullname-error"></span>
+  </div>
+  <div>
+    <label for="id_employeeid">Employee ID:</label>
+    <input type="text" id="id_employeeid" name="employeeid" required pattern="[A-Za-z0-9]+" title="Employee ID should contain only characters and digits">
+    <span  style="color:red" class="error-message" id="employeeid-error"></span>
+  </div>
+  <div>
+    <label for="id_username">Username:</label>
+    <input type="text" id="id_username" name="username" required>
+    <span  style="color:red" class="error-message" id="username-error"></span>
+  </div>
+  <div>
+    <label for="id_email">Email:</label>
+    <input type="email" id="id_email" name="email" required>
+    <span  style="color:red" class="error-message" id="email-error"></span>
+  </div>
+  <div>
+    <label for="id_password">Password:</label>
+    <input type="password" id="id_password" name="password" required minlength="6">
+    <span  style="color:red" class="error-message" id="password-error"></span>
+  </div>
+  <div>
+    <label for="id_confirm_password">Confirm Password:</label>
+    <input type="password" id="id_confirm_password" name="confirm_password" required minlength="6">
+    <span  style="color:red" class="error-message" id="confirm-password-error"></span>
+  </div>
+  <div>
+    <label for="id_dob">Date of Birth:</label>
+    <input type="date" id="id_dob" name="dob" required>
+    <span  style="color:red" class="error-message" id="dob-error"></span>
+  </div>
+  <div>
+    <label for="id_joining_date">Joining Date:</label>
+    <input type="date" id="id_joining_date" name="joining_date" required>
+    <span  style="color:red"  class="error-message" id="joining-date-error"></span>
+  </div>
+  <div>
+    <label for="id_gender">Gender:</label>
+    <select id="id_gender" name="gender" required>
+      <option value="">Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+    <span  style="color:red" class="error-message" id="gender-error"></span>
+  </div>
+
+
+  <div>
+    <label for="id_phone">Phone Number:</label>
+    <input type="tel" id="id_phone" name="phone" required pattern="[0-9]{10}" title="Phone number should be 10 digits without spaces or special characters">
+    <span  style="color:red" class="error-message" id="phone-error"></span>
+  </div>
+
+
+
+   <div >
+       <label for="role">Role<span class="star">*</span></label>
+          <select id="role" name="role" class="form-control" required>
+              <option  selected="selected" disabled>Role</option>
+              <option value="Dontnet devloper">Dontnet devloper</option>
+              <option value="Python devloper">Python devloper</option>
+              <option value="Testing Engineer">Testing Engineer</option>
+              <option value="Hr">Hr</option>
+              <option value="BA Analyst">BA Analyst</option>
+              <option value="Sales Analyst">Sales Analyst</option>
+              <option value="Manger">Manger</option>
+              <option value="Sr Manger">Sr Manger</option>
+              <option value="CEO">CEO</option>
+          </select>
+       <span style="color:red" class="error-message" id="role-error"></span>
+   </div><br>
+
+     <div >
+         <label for="shift" class="form-label">Shift Time  <span class="star">*</span></label>
+
+
+         <select name="shift" id="shift" class="form-control" required>
+             <option  selected="selected" disabled>Shif Time</option>
+             <option value="09:30AM-7:00PM">09:30AM-7:00PM</option>
+             <option value="02:00PM-10:00PM">02:00PM-10:00PM</option>
+             <option value="06:00AM-02:00PM">06:00AM-02:00PM</option>
+
+         </select>
+         <span style="color:red" class="error-message" id="shift-error"></span>
+
+     </div>
+      <div>
+    <h6><b>Please Select Your Designation <span class="star">*</span></label>:</b></h6>
+
+    <input type="radio" id="manager" name="designation" value="manager">
+    <label for="manager">Manager</label><br>
+    <input type="radio" id="hr" name="designation" value="hr">
+    <label for="hr">Human Resource(HR)</label><br>
+    <input type="radio" id="employee" name="designation" value="employee"checked>
+    <label for="employee">Employee</label>
+    <span style="color:red" class="error-message" id="manager-error" ></span>
+
+    </div>
+
+
+
+
+
+
+<input type="submit" value="Submit">
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $("#my-form").on("submit", function(event) {
+      event.preventDefault();
+
+      // Reset previous error messages
+      $(".error-message").text("");
+
+      // Validate fields
+      var fullname = $("#id_fullname").val();
+      var employeeid = $("#id_employeeid").val();
+      var username = $("#id_username").val();
+      var email = $("#id_email").val();
+      var password = $("#id_password").val();
+      var confirm_password = $("#id_confirm_password").val();
+      var dob = $("#id_dob").val();
+      var joining_date = $("#id_joining_date").val();
+      var gender = $("#id_gender").val();
+      var designation = $("#id_designation").val();
+      var phone = $("#id_phone").val();
+      var shift = $("#shift").val();
+      var role = $("#role").val();
+
+      var errors = false;
+
+      // Check full name field
+      if (!fullname) {
+        $("#fullname-error").text("Full Name field is required.");
+        errors = true;
+      } else {
+        var regex = /^[A-Za-z\s]+$/;
+        if (!regex.test(fullname)) {
+          $("#fullname-error").text("Full Name should contain only characters (no numbers or special characters).");
+          errors = true;
+        }
+      }
+
+      // Check employee ID field
+      if (!employeeid) {
+        $("#employeeid-error").text("Employee ID field is required.");
+        errors = true;
+      } else {
+        var regex = /^[A-Za-z0-9]+$/;
+        if (!regex.test(employeeid)) {
+          $("#employeeid-error").text("Employee ID should contain only characters and digits.");
+          errors = true;
+        }
+      }
+
+      // Check username field
+      if (!username) {
+        $("#username-error").text("Username field is required.");
+        errors = true;
+      } else if (username.length < 6) {
+        $("#username-error").text("Username must be at least 6 characters long.");
+        errors = true;
+      } else {
+        var regex = /^[A-Za-z]+$/;
+        if (!regex.test(username)) {
+          $("#username-error").text("Username should contain only characters (no numbers or special characters).");
+          errors = true;
+        }
+      }
+
+      // Check email field
+      if (!email) {
+        $("#email-error").text("Email field is required.");
+        errors = true;
+      }
+       if (!role) {
+        $("#role-error").text("Role field is required.");
+        errors = true;
+      }
+       if (!shift) {
+        $("#shift-error").text("Shift field is required.");
+        errors = true;
+      }
+
+
+
+      // Check password field
+      if (!password) {
+        $("#password-error").text("Password field is required.");
+        errors = true;
+      } else if (password.length < 6) {
+        $("#password-error").text("Password must be at least 6 characters long.");
+        errors = true;
+      }
+
+      // Check confirm password field
+      if (!confirm_password) {
+        $("#confirm-password-error").text("Confirm Password field is required.");
+        errors = true;
+      } else if (confirm_password !== password) {
+        $("#confirm-password-error").text("Passwords do not match.");
+        errors = true;
+      }
+
+      // Check date of birth field
+      if (!dob) {
+        $("#dob-error").text("Date of Birth field is required.");
+        errors = true;
+      }
+
+      // Check joining date field
+      if (!joining_date) {
+        $("#joining-date-error").text("Joining Date field is required.");
+        errors = true;
+      }
+
+      // Check gender field
+      if (!gender) {
+        $("#gender-error").text("Gender field is required.");
+        errors = true;
+      }
+
+      // Check designation field
+      if (!designation) {
+        $("#designation-error").text("Designation field is required.");
+        errors = true;
+      }
+
+      // Check phone number field
+      if (!phone) {
+        $("#phone-error").text("Phone Number field is required.");
+        errors = true;
+      } else {
+        var phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(phone)) {
+          $("#phone-error").text("Phone number should be 10 digits without spaces or special characters.");
+          errors = true;
+        }
+      }
+
+      // If there are no errors, submit the form
+      if (!errors) {
+        $(this).off("submit").submit(); // This will prevent an infinite loop
+      }
+    });
+  });
+</script>

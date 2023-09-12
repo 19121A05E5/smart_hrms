@@ -1,0 +1,86 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+<head>
+    <style>
+        table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+    </style>
+
+
+
+    <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+</head>
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12">
+
+          <div class="card" style="height:750px">
+                  <h3 class="pt-3 ml-3">Applied Permissions List</h3><hr>
+
+
+
+<!--Table-->
+<table id="example" class="display mt-5" style="width:90%">
+
+  <!--Table head-->
+  <thead>
+    <tr>
+      <th>ID</th>
+
+
+    </tr>
+  </thead>
+  <!--Table head-->
+
+  <!--Table body-->
+  <tbody>
+    {% for permission in permissionapprove %}
+    <tr class="">
+
+
+
+
+                <td>{{permission.permission_id}}</td>
+
+
+
+
+            </tr>
+{%endfor%}
+
+  </tbody>
+  <!--Table body-->
+
+
+</table>
+
+
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+ <script>
+     new DataTable('#example');
+ </script>
+
+ {%endblock%}

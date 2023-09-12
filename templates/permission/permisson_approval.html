@@ -1,0 +1,69 @@
+
+{%extends 'base1.html'%}
+
+{%block content%}
+
+
+
+<body>
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12">
+
+          <div class="card" style="height:1100px">
+
+
+
+{%if user.is_manager%}
+
+    <h1  class="ml-3" style="margin-left:15px;color:#FF1493">Permission Approval</h1><hr>
+    <p style="margin-left:10px;">Permission Request ID: {{ permission.id }}</p>
+    <p style="margin-left:10px;">Employee: {{ permission.employee }}</p>
+    <p style="margin-left:10px;">permission Type: {{permission.permission_category }}</p>
+    <p style="margin-left:10px;">Start Date: {{permission.StartDate }}</p>
+    <p style="margin-left:10px;">End Date: {{ permission.EndDate }}</p>
+              <p style="margin-left:10px;">Start Time: {{permission.start_time }}</p>
+    <p style="margin-left:10px;">End Time: {{ permission.end_time }}</p>
+              <p style="margin-left:10px;"> Time Duration: {{permission.Time_duration }}</p>
+    <p style="margin-left:10px;">Reason: {{permission.reason }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="approval_status" style="margin-left:10px;">Approval Status:</label>
+        <select name="approval_status" id="approval_status" style="margin-left:10px;">
+             <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select><br><br>
+        <div class="form-group" style="margin-left:10px;">
+					<label for="approver">
+						Approver Name:
+					</label>
+
+					<input type="text"
+						name="approvername"
+						id="approvername"
+                            value="{{ user.username }}"
+						class="form-control w-50">
+
+				</div><br>
+
+        <label for="comments">Comments:</label>
+        <textarea name="comments" id="comments"></textarea><br>
+
+     <button type="submit" class="btn btn-primary btn-lg text-center mt-3 ml-5" style="margin-left:15px;">Sumit</button>
+        {%endif%}
+      </form>
+
+		  </div>
+		</div>
+	</section>
+</main>
+</body>
+
+</html>
+{% endblock%}

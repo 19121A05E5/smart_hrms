@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+	<link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	jQuery library -->
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<!-- Popper JS -->
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js">
+	</script>
+
+	<!--<script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js">
+	</script> -->
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script><style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)}
+  to {-webkit-transform: scale(1)}
+}
+
+@keyframes animatezoom {
+  from {transform: scale(0)}
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }d
+}
+</style>
+</head>
+<body>
+
+<h2>Modal Login Form</h2>
+		<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Signup</button>
+
+
+<div id="id01" class="modal">
+    <div class="container">
+		<div class="col-lg-12
+					m-auto d-block">
+			<form id=signup-form method="post">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-xxl-6 ">
+					<div class="form-group">
+					<label for="user">
+						Username:
+					</label>
+					<input type="text"
+						name="username"
+						id="usernames"
+						class="form-control">
+					<small id="usercheck" style="color: red;">
+						**Username is missing
+					</small>
+				</div>
+					 <div class="form-group">
+					<label for="lastname">
+						LastName:
+					</label>
+					<input type="text"
+						name="lastname"
+						id="lastnames"
+						class="form-control">
+
+				</div>
+					<div class="form-group">
+					<label for="password">
+						Password:
+					</label>
+					<input type="password"
+						name="password"
+						id="password"
+						class="form-control">
+					<small id="passcheck"
+						style="color: red;">
+						**Please Fill the password
+					</small>
+				</div>
+
+
+				<div class="form-group">
+					<label for="dob">
+						Date of birth:
+					</label>
+					<input type="date"
+						name="dob"
+						id="dob"
+						class="form-control">
+
+				</div><br>
+
+                	<div class="form-group">
+					<label for="course">
+						Designation:
+					</label>
+
+
+						<select name="course">
+                             <option selected="selected" disabled>designation</option>
+                             <option value="B.tech">B.tech</option>
+                             <option value="M.tech">M.tech</option>
+					     	 <option value="Degreee">Degreee</option>
+							 <option value="Phd">Phd</option>
+
+
+                         </select>
+
+				</div><br>
+
+				<div class="form-group">
+					<label for="department">
+						Department:
+					</label>
+						<select name="department">
+                       <option  selected="selected" disabled>Department</option>
+                        <option value="IT">IT</option>
+                       <option value="BA">BA</option>
+						 <option value="Sales">Sales</option>
+							 <option value="Hr">Hr</option>
+							<option value="Accounts">Accounts</option>
+
+
+                         </select>
+
+				</div><br>
+				<div class="form-group">
+					<label for="shift">
+						Shift Time:
+					</label>
+
+
+						<select name="shift">
+							<option  selected="selected" disabled>shift time</option>
+                       <option value="09:30AM-7:00PM">09:30AM-7:00PM</option>
+						<option value="02:00PM-10:00PM">02:00PM-10:00PM</option>
+						<option value="06:00AM-02:00PM">06:00AM-02:00PM</option>
+
+                         </select>
+
+				</div><br>
+
+
+
+			<div class="form-group">
+
+	 <p>Please select your category:</p>
+<input type="radio" id="Employee" name="category" value="Employee">
+<label for="Employee">Employee</label><br>
+ <input type="radio" id="HR" name="category" value="HR">
+ <label for="HR">Hr</label><br>
+<input type="radio" id="Manager" name="category" value="Manager">
+ <label for="Manager">Manager</label>
+
+
+
+
+</div>
+
+</div>
+
+
+					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-xxl-6 ">
+							<div class="form-group">
+					<label for="firstname">
+						FirstName:
+					</label>
+					<input type="text"
+						name="firstname"
+						id="firstnames"
+						class="form-control">
+
+				</div>
+						<div class="form-group">
+					<label for="user">
+						Email:
+					</label>
+					<input type="email"
+						name="email"
+						id="email" required
+						class="form-control">
+					<small id="emailvalid"
+						class="form-text text-muted invalid-feedback" style="color: red;">
+						Your email must be a valid email
+					</small>
+				</div>
+							<div class="form-group">
+					<label for="cpassword">
+						Confirm Password:
+					</label>
+					<input type="password"
+						name="cpwd"
+						id="conpassword"
+						class="form-control">
+					<small id="conpasscheck"
+						style="color: red;">
+						**Password didn't match
+					</small>
+				</div>
+						<div class="form-group">
+					<label for="EmployeeID">
+						EmployeeID:
+					</label>
+					<input type="employeeid"
+						name="empid"
+						id="Employee Id"
+						class="form-control">
+				           </div>
+
+                	<div class="form-group">
+					<label for="phoneno">
+						PhoneNumber:
+					</label>
+					<input type="text"
+						name="phno"
+						id="phoneno"
+						class="form-control">
+
+				</div><br>
+                	<div class="form-group">
+					<label for="gender">
+						Gender:
+					</label>
+
+
+						<select name="gender">
+                       <option  selected="selected" disabled>Gender</option>
+                        <option value="Male">Male</option>
+                       <option value="Female">Female</option>
+						 <option value="Others">Others</option>
+
+
+                         </select>
+
+				</div><br>
+
+                  <div class="form-group">
+					<label for="role">
+						Role:
+					</label>
+
+
+						<select name="role">
+                       <option  selected="selected" disabled>Role</option>
+                        <option value="Dontnet devloper">Dontnet devloper</option>
+                       <option value="Python devloper">Python devloper</option>
+						 <option value="Testing Engineer">Testing Engineer</option>
+							 <option value="Hr">Hr</option>
+							<option value="BA Analyst">BA Analyst</option>
+							<option value="Sales Analyst">Sales Analyst</option>
+							<option value="Manger">Manger</option>
+							<option value="Sr Manger">Sr Manger</option>
+							<option value="CEO">CEO</option>
+
+
+                         </select>
+
+				</div>
+
+         </div>
+	</div>
+
+				<input type="submit"
+					id="submitbtn"
+					value="Submit"
+					class="btn btn-primary">
+
+                 </form>
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+       <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+		</div>
+
+
+
+
+	</div>
+
+
+</div>
+
+
+
+<script>
+    // Document is ready
+$(document).ready(function () {
+
+// Validate Username
+$("#usercheck").hide();
+let usernameError = true;
+$("#usernames").keyup(function () {
+    validateUsername();
+
+});
+
+function validateUsername() {
+    let usernameValue = $("#usernames").val();
+    if (usernameValue.length == "") {
+        $("#usercheck").show();
+        usernameError = false;
+        return false;
+    } else if (usernameValue.length < 3 || usernameValue.length > 10) {
+        $("#usercheck").show();
+        $("#usercheck").html("**length of username must be between 3 and 10");
+        usernameError = false;
+        return false;
+    }
+     var reg  = /^[A-Za-z]+$/;
+    if(!reg.test(usernameValue)) {
+        $("#usercheck").show();
+        $("#usercheck").html(
+            "**Username should contains only characters"
+
+        );
+        usernameError = false;
+        return false;
+    }
+     else {
+        $("#usercheck").hide();
+    }
+}
+
+// Validate Email
+const email = document.getElementById("email");
+email.addEventListener("blur", () => {
+    let regex =
+    /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+    let s = email.value;
+    if (regex.test(s)) {
+        email.classList.remove("is-invalid");
+        emailError = true;
+    } else {
+        email.classList.add("is-invalid");
+        emailError = false;
+    }
+});
+
+// Validate Password
+$("#passcheck").hide();
+let passwordError = true;
+$("#password").keyup(function () {
+    validatePassword();
+});
+function validatePassword() {
+    let passwordValue = $("#password").val();
+    if (passwordValue.length == "") {
+        $("#passcheck").show();
+        passwordError = false;
+        return false;
+    }
+    if (passwordValue.length < 3 || passwordValue.length > 10) {
+        $("#passcheck").show();
+        $("#passcheck").html(
+            "**length of your password must be between 3 and 10"
+        );
+        $("#passcheck").css("color", "red");
+        passwordError = false;
+        return false;
+    }
+    var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    if(!reg.test(passwordValue)) {
+        $("#passcheck").show();
+        $("#passcheck").html(
+            "**password should contain atleast one number and one special character"
+
+        );
+        passwordError = false;
+
+
+        return false;
+    }
+
+
+
+
+
+    else {
+        $("#passcheck").hide();
+    }
+}
+
+// Validate Confirm Password
+$("#conpasscheck").hide();
+let confirmPasswordError = true;
+$("#conpassword").keyup(function () {
+    validateConfirmPassword();
+});
+function validateConfirmPassword() {
+    let confirmPasswordValue = $("#conpassword").val();
+    let passwordValue = $("#password").val();
+    if (passwordValue != confirmPasswordValue) {
+        $("#conpasscheck").show();
+        $("#conpasscheck").html("**Password didn't Match");
+        $("#conpasscheck").css("color", "red");
+        confirmPasswordError = false;
+        return false;
+    } else {
+        $("#conpasscheck").hide();
+    }
+}
+
+// Submit button
+$("#submitbtn").click(function () {
+    validateUsername();
+    validatePassword();
+    validateConfirmPassword();
+    validateEmail();
+    if (
+        usernameError == true &&
+        passwordError == true &&
+        confirmPasswordError == true &&
+        emailError == true
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+
+});
+});
+
+
+
+
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+
+</body>
+
+</html>
+
+
+<!-- var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    if(!reg.test(passwordValue)) {
+        $("#passcheck").show();
+        $("#passcheck").html(
+            "**password should contain atleast one number and one special character"
+
+        );
+        passwordError = false;
+
+
+        return false;
+    }
+
+-->

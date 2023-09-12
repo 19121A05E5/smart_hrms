@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- delete_manager.html -->
+<h1>Delete Employee</h1>
+<p>Are you sure you want to delete the manager "{{ .user.username }}"?</p>
+<form method="POST" action="{% url 'delete_manager' manager.id %}">
+  {% csrf_token %}
+  <input type="submit" value="Delete">
+</form>
+
+</body>
+</html>

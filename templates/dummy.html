@@ -1,0 +1,105 @@
+
+
+
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+    </style>
+</head>
+
+<form id="signup-form">
+  <input type="text" id="username" placeholder="Username">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <input type="password" id="confirm-password" placeholder="Confirm Password">
+  <button type="submit">Sign Up</button>
+</form>
+<script>
+$(document).ready(function() {
+  $('#signup-form').submit(function(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Get form field values
+    var username = $('#username').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var confirmPassword = $('#confirm-password').val();
+
+    // Perform validation
+    var isValid = true;
+
+    // Validate username
+    if (username.trim() === '') {
+      displayError('username', 'Username is required');
+      isValid = false;
+    } else {
+      clearError('username');
+    }
+
+    // Validate email
+    if (email.trim() === '') {
+      displayError('email', 'Email is required');
+      isValid = false;
+    } else if (!isValidEmail(email)) {
+      displayError('email', 'Invalid email format');
+      isValid = false;
+    } else {
+      clearError('email');
+    }
+
+    // Validate password
+    if (password.trim() === '') {
+      displayError('password', 'Password is required');
+      isValid = false;
+    } else if (password.length < 6) {
+      displayError('password', 'Password must be at least 6 characters');
+      isValid = false;
+    } else {
+      clearError('password');
+    }
+
+    // Validate confirm password
+    if (confirmPassword.trim() === '') {
+      displayError('confirm-password', 'Confirm Password is required');
+      isValid = false;
+    } else if (password !== confirmPassword) {
+      displayError('confirm-password', 'Passwords do not match');
+      isValid = false;
+    } else {
+      clearError('confirm-password');
+    }
+
+    // Submit the form if valid
+    if (isValid) {
+      $('#signup-form')[0].submit();
+    }
+  });
+
+  function displayError(fieldId, errorMessage) {
+    var field = $('#' + fieldId);
+    var errorField = $('#' + fieldId + '-error');
+    if (errorField.length > 0) {
+      errorField.text(errorMessage);
+    } else {
+      field.after('<div id="' + fieldId + '-error" class="error">' + errorMessage + '</div>');
+    }
+  }
+
+  function clearError(fieldId) {
+    $('#' + fieldId + '-error').remove();
+  }
+
+  function isValidEmail(email) {
+    // Email validation logic (e.g., regex)
+    // Return true if email is valid, false otherwise
+  }
+});
+
+</script>

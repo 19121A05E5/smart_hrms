@@ -1,0 +1,855 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke; height:800px; padding-top: 50px; padding-right: 1px; padding-bottom: 50px; padding-left: 50px;" >
+
+
+
+
+
+
+
+<div class="col-xl-12">
+    <div class="tab-content" id="v-pills-tabContent">
+
+
+
+                         <div class="tab-pane fade show active" id="v-pills-Travel" role="tabpanel" aria-labelledby="v-pills-Travel-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+                         <h3 style="color:#1E7CCF ;"><b>Travel</b></h3>
+                         <hr>
+
+
+
+
+
+                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#travel">
+                                             Add Travel Info
+                                           </button><p></p>
+
+                                           <div class="table-responsive">
+                                           <table id="travel-table" class="table ">
+                                           <thead>
+                                           <tr>
+                                           <th>Employee</th>
+                                           <th>Company</th>
+                                           <th>Place of Visit</th>
+                                           <th>Purpose of Visit</th>
+                                           <th>Start Date</th>
+                                           <th>End Date</th>
+                                             <th>Travel By</th>
+                                                <th>Estimate Price</th>
+                                               <th> Actual price</th>
+                                           <th class="not-exported">action</th>
+                                           </tr>
+                                           </thead>
+
+
+
+
+      <tbody>
+                      {%for travel in data24%}
+
+
+
+                          <tr>
+                          <td>{{travel.employee.username}}
+
+                          </td>
+                           <td>{{travel.company.name}}
+
+                          </td>
+                              <td>{{travel.place_of_visit}}
+
+                          </td>
+                           <td>{{travel.purpose_of_visit}}
+
+                          </td>
+                              <td>{{travel.start_date}}
+
+                          </td>
+                               <td>{{travel.end_date}}
+
+                          </td>
+                               <td>{{travel.travel_mode}}
+
+                          </td>
+                               <td>{{travel.expected_budget}}
+
+                          </td>
+                               <td>{{travel.actual_budget}}
+
+                          </td>
+
+
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_travel" data-record-id="{{travel.id}}" value="{{travel.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_travel" data-record-id="{{travel.id}}" value="{{travel.id}}" style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+
+                                           </table>
+                                           </div>
+
+
+
+
+                                           <div class="modal fade modal-dialog modal-lg modal-dialog-centered" id="travel"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                               <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Travel</h1>
+                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                 </div>
+                                                 <div class="modal-body">
+
+                                                   <form method="post" id="travel_sample_form" class="form-horizontal" autocomplete="off">
+                                                       {% csrf_token %}
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+                                                  <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_travel" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country-error"></span>
+    </div>
+
+
+
+<div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_travel" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee-error"></span>
+    </div>
+
+
+                                                       <div class="col-md-6 form-group">
+                                <label>Arrangement Type<span class="star">*</span></label>
+                                <select id="arrangement_type" name="arrangement type" class="form-control" required>
+                                  <option value="" disabled selected>Arrangement Type</option>
+                                   <option value="Corporation">Corporation</option>
+                                    <option value="Guest House">Guest House</option>
+                                    <option value="Hotel">Hotel</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="arrangement_type-error"></span>
+                                </div>
+
+
+                                                    <div class="col-md-6 form-group">
+                                               <label>Purpose of Visit<span class="star">*</span></label>
+                                               <input type="text" name="purpose of visit" id="purpose_of_visit" placeholder="Purpose Of Visit" title="" required="" class="form-control">
+                                             </div>
+                                                       <div class="col-md-6 form-group">
+                                               <label>Place Of Visit<span class="star">*</span></label>
+                                               <input type="text" name="place of visit" id="place_of_visit" placeholder="Place Of Visit" title="" required="" class="form-control">
+                                             </div>
+
+
+                                               <div class="col-md-6 form-group">
+                                               <label>Description</label>
+                                               <input type="text" name="description" id="description_travel" placeholder="Description" title="" class="form-control">
+                                             </div>
+
+
+
+
+                                           <div class="col-md-6 form-group">
+                                           <label>start Date<span class="star">*</span></label>
+                                           <input type="date" name="start date" id="start_date_travel" placeholder="Start Date" title="" required="" class="form-control">
+                                         </div>
+
+                                                       <div class="col-md-6 form-group">
+                                           <label>End Date<span class="star">*</span></label>
+                                           <input type="date" name="end date" id="end_date_travel" placeholder="End Date" title="" required="" class="form-control">
+                                         </div>
+
+
+                                                         <div class="col-md-6 form-group">
+                                           <label>Expected Budget<span class="star">*</span></label>
+                                           <input type="number" name="expected budget" id="expected_budget" placeholder="Expected Budget" title="" required="" class="form-control">
+                                         </div>
+
+
+                                                         <div class="col-md-6 form-group">
+                                           <label>Actual Budget<span class="star">*</span></label>
+                                           <input type="number" name="actual budget" id="actual_budget" placeholder="Actual Budget" title="" required="" class="form-control">
+                                         </div>
+
+
+                                                       <div class="col-md-6 form-group">
+                                <label>Travel Mode<span class="star">*</span></label>
+                                <select id="travel_mode" name="travel mode" class="form-control" required>
+                                  <option value="" disabled selected>Travel Mode</option>
+                                   <option value="By Bus">By Bus</option>
+                                    <option value="By Train">By Train</option>
+                                    <option value="By Plain">By Plain</option>
+                                    <option value="By Taxi">By Taxi</option>
+                                    <option value="By Car">By Car</option>
+                                    <option value="By Others">By Others</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="travel_mode_travel-error"></span>
+                                </div>
+
+
+                                                             <div class="col-md-6 form-group">
+                                <label>Status<span class="star">*</span></label>
+                                <select id="status" name="status" class="form-control" required>
+                                  <option value="" disabled selected>Status</option>
+                                   <option value="Pending">Pending</option>
+                                    <option value="First Level Approval">First Level Approval</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="travel_mode-error"></span>
+                                </div>
+
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="travel_action">
+                                                 <input type="hidden" name="hidden_id" id="travel_hidden_id">
+                                                 <input type="submit" name="action_button" id="travel_action_button" class="btn btn-warning" value="Add">
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                     </div>
+                                               </div>
+                                             </div>
+                                           </div>
+                                           </div>
+
+
+
+
+
+                             <div class="modal fade" id="update_travel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+                                                   <form method="post" id="travel_sample_form_upd" class="form-horizontal" autocomplete="off">
+                                                       {% csrf_token %}
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+
+                                                  <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_travel_upd" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_upd-error"></span>
+    </div>
+
+
+
+<div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_travel_upd" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee_upd-error"></span>
+    </div>
+
+
+                                                       <div class="col-md-6 form-group">
+                                <label>Arrangement Type<span class="star">*</span></label>
+                                <select id="arrangement_type_upd" name="arrangement type" class="form-control" required>
+                                  <option value="" disabled selected>Arrangement Type</option>
+                                   <option value="Corporation">Corporation</option>
+                                    <option value="Guest House">Guest House</option>
+                                    <option value="Hotel">Hotel</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="arrangement_type_upd-error"></span>
+                                </div>
+
+
+                                                    <div class="col-md-6 form-group">
+                                               <label>Purpose of Visit<span class="star">*</span></label>
+                                               <input type="text" name="purpose of visit" id="purpose_of_visit_upd" placeholder="Purpose Of Visit" title="" required="" class="form-control">
+                                             </div>
+                                                       <div class="col-md-6 form-group">
+                                               <label>Place Of Visit<span class="star">*</span></label>
+                                               <input type="text" name="place of visit" id="place_of_visit_upd" placeholder="Place Of Visit" title="" required="" class="form-control">
+                                             </div>
+
+
+                                               <div class="col-md-6 form-group">
+                                               <label>Description</label>
+                                               <input type="text" name="description" id="description_travel_upd" placeholder="Description" title="" class="form-control">
+                                             </div>
+
+
+
+
+                                           <div class="col-md-6 form-group">
+                                           <label>start Date<span class="star">*</span></label>
+                                           <input type="date" name="start date" id="start_date_travel_upd" placeholder="Start Date" title="" required="" class="form-control">
+                                         </div>
+
+                                                       <div class="col-md-6 form-group">
+                                           <label>End Date<span class="star">*</span></label>
+                                           <input type="date" name="end date" id="end_date_travel_upd" placeholder="End Date" title="" required="" class="form-control">
+                                         </div>
+
+
+                                                         <div class="col-md-6 form-group">
+                                           <label>Expected Budget<span class="star">*</span></label>
+                                           <input type="number" name="expected budget" id="expected_budget_upd" placeholder="Expected Budget" title="" required="" class="form-control">
+                                         </div>
+
+
+                                                         <div class="col-md-6 form-group">
+                                           <label>Actual Budget<span class="star">*</span></label>
+                                           <input type="number" name="actual budget" id="actual_budget_upd" placeholder="Actual Budget" title="" required="" class="form-control">
+                                         </div>
+
+
+                                                       <div class="col-md-6 form-group">
+                                <label>Travel Mode<span class="star">*</span></label>
+                                <select id="travel_mode_upd" name="travel mode" class="form-control" required>
+                                  <option value="" disabled selected>Travel Mode</option>
+                                   <option value="By Bus">By Bus</option>
+                                    <option value="By Train">By Train</option>
+                                    <option value="By Plain">By Plain</option>
+                                    <option value="By Taxi">By Taxi</option>
+                                    <option value="By Car">By Car</option>
+                                    <option value="By Others">By Others</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="travel_mode_travel_upd-error"></span>
+                                </div>
+
+
+                                                             <div class="col-md-6 form-group">
+                                <label>Status<span class="star">*</span></label>
+                                <select id="status_upd" name="status" class="form-control" required>
+                                  <option value="" disabled selected>Status</option>
+                                   <option value="Pending">Pending</option>
+                                    <option value="First Level Approval">First Level Approval</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="travel_mode_upd-error"></span>
+                                </div>
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="travel_action_upd">
+                                                 <input type="hidden" name="hidden_id" id="travel_id">
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+                                                 </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+                           <div class="modal fade" id="delete_travel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="travel_delete_form">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Travel Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+                       </div>
+</div>
+          </div>
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+             $("#travel_sample_form").submit(function(event) {
+                 event.preventDefault();
+
+                 var company_travel = $("#company_travel").val();
+                 var employee_travel = $("#employee_travel").val();
+                 var arrangement_type = $("#arrangement_type").val();
+                 var purpose_of_visit = $("#purpose_of_visit").val();
+                 var place_of_visit = $("#place_of_visit").val();
+                 var description_travel = $("#description_travel").val();
+                 var start_date_travel = $("#start_date_travel").val();
+                 var end_date_travel = $("#end_date_travel").val();
+                 var expected_budget = $("#expected_budget").val();
+                 var actual_budget = $("#actual_budget").val();
+                 var travel_mode = $("#travel_mode").val();
+                 var status = $("#status").val();
+
+
+
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+
+                      var form24Data = new FormData();
+                      form24Data.append('company_travel', company_travel);
+                      form24Data.append('employee_travel', employee_travel);
+                      form24Data.append('arrangement_type', arrangement_type);
+                      form24Data.append('purpose_of_visit', purpose_of_visit);
+                      form24Data.append('place_of_visit', place_of_visit);
+                      form24Data.append('description_travel', description_travel);
+                      form24Data.append('start_date_travel', start_date_travel);
+                      form24Data.append('end_date_travel', end_date_travel);
+                      form24Data.append('expected_budget', expected_budget);
+                      form24Data.append('actual_budget', actual_budget);
+                      form24Data.append('travel_mode', travel_mode);
+                      form24Data.append('status', status);
+
+
+
+
+
+
+                        form24Data.append('data_id', data_id);
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'travel' %}",
+
+                    data:form24Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#travel-table');
+ </script>
+
+
+
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_travel"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#travel_id').val(recordId);
+  })
+
+
+         $("#travel_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+                var company_travel_upd = $("#company_travel_upd").val();
+                var employee_travel_upd = $("#employee_travel_upd").val();
+                var arrangement_type_upd  = $("#arrangement_type_upd ").val();
+                var purpose_of_visit_upd = $("#purpose_of_visit_upd").val();
+                var place_of_visit_upd = $("#place_of_visit_upd").val();
+                var description_travel_upd = $("#description_travel_upd").val();
+                var start_date_travel_upd = $("#start_date_travel_upd").val();
+                var end_date_travel_upd = $("#end_date_travel_upd").val();
+                var expected_budget_upd  = $("#expected_budget_upd ").val();
+                var actual_budget_upd = $("#actual_budget_upd").val();
+                var travel_mode_upd = $("#travel_mode_upd").val();
+                var status_upd = $("#status_upd").val();
+
+
+
+
+
+                  var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+                        var recordId = $('#travel_id').val();
+
+                      var form24Data = new FormData();
+                      form24Data.append('company_travel_upd', company_travel_upd);
+                      form24Data.append('employee_travel_upd', employee_travel_upd);
+                        form24Data.append('arrangement_type_upd', arrangement_type_upd);
+                        form24Data.append('purpose_of_visit_upd', purpose_of_visit_upd);
+                        form24Data.append('place_of_visit_upd', place_of_visit_upd);
+                        form24Data.append('description_travel_upd', description_travel_upd);
+                         form24Data.append('start_date_travel_upd', start_date_travel_upd);
+                      form24Data.append('end_date_travel_upd', end_date_travel_upd);
+                        form24Data.append('expected_budget_upd', expected_budget_upd);
+                        form24Data.append('actual_budget_upd', actual_budget_upd);
+                        form24Data.append('travel_mode_upd', travel_mode_upd);
+                        form24Data.append('status_upd', status_upd);
+
+
+
+                           form24Data.append('travel_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/update_travel/",
+
+                    data:form24Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+<script>
+
+       $('[data-bs-target="#update_travel"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/travel_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#company_travel_upd").val(response.company_travel_upd);
+            $("#employee_travel_upd").val(response.employee_travel_upd);
+            $("#arrangement_type_upd").val(response.arrangement_type_upd);
+            $("#purpose_of_visit_upd").val(response.purpose_of_visit_upd);
+            $("#place_of_visit_upd").val(response.place_of_visit_upd);
+            $("#description_travel_upd").val(response.description_travel_upd);
+            $("#start_date_travel_upd").val(response.start_date_travel_upd);
+            $("#end_date_travel_upd").val(response.end_date_travel_upd);
+            $("#expected_budget_upd").val(response.expected_budget_upd);
+            $("#actual_budget_upd").val(response.actual_budget_upd);
+            $("#travel_mode_upd").val(response.travel_mode_upd);
+            $("#status_upd").val(response.status_upd);
+
+
+
+
+
+
+            $('#update_travel').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching travel data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_travel"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#travel_id').val(recordId);
+  })
+
+
+         $("#travel_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#travel_id').val();
+
+
+                      var form24Data = new FormData();
+
+
+                           form24Data.append('travel_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/delete_travel/",
+
+                    data:form24Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

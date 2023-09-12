@@ -1,0 +1,628 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke; height:800px; padding-top: 50px; padding-right: 1px; padding-bottom: 50px; padding-left: 50px;" >
+
+
+
+
+
+
+
+<div class="col-xl-12">
+    <div class="tab-content" id="v-pills-tabContent">
+
+
+
+                         <div class="tab-pane fade show active" id="v-pills-Company" role="tabpanel" aria-labelledby="v-pills-Company-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+                        <h3 style="color:#1E7CCF ;"><b>Company</b></h3>
+                         <hr>
+
+
+
+
+
+                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#company_com">
+                                             Add Company Info
+                                           </button><p></p>
+
+                                           <div class="table-responsive">
+                                           <table id="company-table" class="table ">
+                                           <thead>
+                                           <tr>
+                                           <th>Company</th>
+                                           <th>Email</th>
+                                           <th>Phone</th>
+                                           <th>Registration Number</th>
+                                           <th class="not-exported">action</th>
+                                           </tr>
+                                           </thead>
+
+
+
+
+      <tbody>
+                      {%for company in data20%}
+
+
+
+                          <tr>
+                          <td>{{company.name}}
+
+                          </td>
+                           <td>{{company.email}}
+
+                          </td>
+                              <td>{{company.phone}}
+
+                          </td>
+                           <td>{{company.registration_number}}
+
+                          </td>
+
+
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_company" data-record-id="{{company.id}}" value="{{company.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_company" data-record-id="{{company.id}}" value="{{company.id}}" style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+
+                                           </table>
+                                           </div>
+
+
+
+
+                                           <div class="modal fade modal-dialog modal-lg modal-dialog-centered" id="company_com"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                               <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Company</h1>
+                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                 </div>
+                                                 <div class="modal-body">
+
+                                                   <form method="company_code" id="company_sample_form" class="form-horizontal" autocomplete="off">
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+                                                   <div class="col-md-6 form-group">
+                                                   <label>Company<span class="star">*</span></label>
+                                                   <input type="text" name="company" id="company_company" placeholder="Company" title="" required="" class="form-control">
+                                                 </div>
+
+
+                                                 <div class="col-md-6 form-group">
+                                                 <label>Trading Name</label>
+                                                 <input type="text" name="trading name" id="trading_name" placeholder="Trading Name" title="" class="form-control">
+                                               </div>
+
+
+
+                                               <div class="col-md-6 form-group">
+                                               <label>Registration Number<span class="star">*</span></label>
+                                               <input type="number" name="registration number" id="registration_number" placeholder="Registration Number" title="" required="" class="form-control">
+                                             </div>
+
+                                             <div class="col-md-6 form-group">
+                                             <label>Phone<span class="star">*</span></label>
+                                             <input type="tel" name="Phone" id="phone" placeholder="Phone" title="" required="" class="form-control">
+                                           </div>
+
+                                           <div class="col-md-6 form-group">
+                                           <label>Email<span class="star">*</span></label>
+                                           <input type="text" name="email" id="email_company" placeholder="Email" title="" required="" class="form-control">
+                                         </div>
+
+
+
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="company_action">
+                                                 <input type="hidden" name="hidden_id" id="company_hidden_id">
+                                                 <input type="submit" name="action_button" id="company_action_button" class="btn btn-warning" value="Add">
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                     </div>
+                                               </div>
+                                             </div>
+                                           </div>
+                                           </div>
+
+
+
+
+                            <div class="modal fade" id="update_company" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+                          <form method="company_code" id="company_sample_form_upd" class="form-horizontal" autocomplete="off">
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+                                                   <div class="col-md-6 form-group">
+                                                   <label>Company<span class="star">*</span></label>
+                                                   <input type="text" name="company" id="company_company_upd" placeholder="Company" title="" required="" class="form-control">
+                                                 </div>
+
+
+                                                 <div class="col-md-6 form-group">
+                                                 <label>Trading Name</label>
+                                                 <input type="text" name="trading name" id="trading_name_upd" placeholder="Trading Name" title="" class="form-control">
+                                               </div>
+
+
+
+                                               <div class="col-md-6 form-group">
+                                               <label>Registration Number<span class="star">*</span></label>
+                                               <input type="number" name="registration number" id="registration_number_upd" placeholder="Registration Number" title="" required="" class="form-control">
+                                             </div>
+
+                                             <div class="col-md-6 form-group">
+                                             <label>Phone<span class="star">*</span></label>
+                                             <input type="tel" name="Phone" id="phone_upd" placeholder="Phone" title="" required="" class="form-control">
+                                           </div>
+
+                                           <div class="col-md-6 form-group">
+                                           <label>Email<span class="star">*</span></label>
+                                           <input type="text" name="email" id="email_company_upd" placeholder="Email" title="" required="" class="form-control">
+                                         </div>
+
+
+
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="company_action_upd">
+                                                 <input type="hidden" name="hidden_id" id="company_id">
+                                                     <button type="submit" class="btn btn-primary">Update</button>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+
+
+
+
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete_company" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="company_delete_form">
+            {% csrf_token %}
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Company Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+                       </div></div>
+    </section>
+</main>
+
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+             $("#company_sample_form").submit(function(event) {
+                 event.preventDefault();
+                 var company_company = $("#company_company").val();
+                 var trading_name = $("#trading_name").val();
+                 var registration_number = $("#registration_number").val();
+                 var phone = $("#phone").val();
+                 var email_company = $("#email_company").val();
+
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+
+                      var form20Data = new FormData();
+                      form20Data.append('company_company', company_company);
+                      form20Data.append('trading_name', trading_name);
+                      form20Data.append('registration_number', registration_number);
+                      form20Data.append('phone', phone);
+                      form20Data.append('email_company', email_company);
+
+
+
+
+
+                        form20Data.append('data_id', data_id);
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'company' %}",
+
+                    data:form20Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#company-table');
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_company"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#company_id').val(recordId);
+  })
+
+
+         $("#company_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+                var company_company_upd = $("#company_company_upd").val();
+                var trading_name_upd = $("#trading_name_upd").val();
+                 var registration_number_upd  = $("#registration_number_upd").val();
+                 var phone_upd = $("#phone_upd").val();
+                 var email_company_upd  = $("#email_company_upd ").val();
+
+
+
+
+                  var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+                        var recordId = $('#company_id').val();
+
+                      var form20Data = new FormData();
+                      form20Data.append('company_company_upd', company_company_upd);
+                      form20Data.append('trading_name_upd', trading_name_upd);
+                        form20Data.append('registration_number_upd', registration_number_upd);
+                        form20Data.append('phone_upd', phone_upd);
+                        form20Data.append('email_company_upd', email_company_upd);
+
+
+
+
+                        form20Data.append('data_id', data_id);
+                           form20Data.append('company_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/update_company/",
+
+                    data:form20Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+<script>
+
+       $('[data-bs-target="#update_company"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/company_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#company_company_upd").val(response.company_company_upd);
+            $("#trading_name_upd").val(response.trading_name_upd);
+            $("#registration_number_upd").val(response.registration_number_upd);
+            $("#phone_upd").val(response.phone_upd);
+            $("#email_company_upd").val(response.email_company_upd);
+
+
+
+
+
+
+            $('#update_company').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching designation data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_company"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#company_id').val(recordId);
+  })
+
+
+         $("#company_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#company_id').val();
+
+
+                      var form20Data = new FormData();
+
+
+                           form20Data.append('company_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/delete_company/",
+
+                    data:form20Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+{%endblock%}

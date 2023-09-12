@@ -1,0 +1,244 @@
+
+{%extends 'base1.html'%}
+
+{%block content%}
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+    <script src="jquery-3.2.1.min.js"></script>
+<script src="bootstrap.min.js"></script>
+
+
+   <title>Difference between dates in days</title>
+    <link href=
+"https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+          rel="stylesheet">
+    <script src=
+"https://code.jquery.com/jquery-1.10.2.js">
+    </script>
+    <script src=
+"https://code.jquery.com/ui/1.10.4/jquery-ui.js">
+    </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+    <title>Leave Request</title>
+</head>
+<body>
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12">
+
+          <div class="card" style="height:1100px">
+               <h1 class="ml-3" style="margin-left:15px;color:#FF1493">Apply Permission Request</h1>
+			  <hr>
+
+                  <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+                       <div class="form-group" style="margin-left:25px;">
+					<label for="employee">
+						Employee Name:
+					</label>
+
+					<input type="text"
+						name="employeename"
+						id="firstnames"
+                            value="{{ user.username }}"
+						class="form-control w-50">
+
+				</div>
+
+         <div class="form-group mt-2" style="margin-left:25px;">
+					<label for="category">
+                        Permiss Categorey:
+					</label>
+                 <select id="permissioncategory" class="form-select w-50 mt-2" aria-label="Default select example" name="category" required>
+                 <option  selected="selected" value="" disabled>Permiss Categorey</option>
+                        <option value="Early Login">Early Login</option>
+                       <option value="Early Logout">Early Logout</option>
+						 <option value="Late Login">Late Login</option>
+					  <option value="Late Logout">Late Logout</option>
+                            <option value="WFH"> WFH </option>
+                </select>
+
+
+
+
+                  <div class="form-group" style="margin-left:2px;">
+					<label for="startdate">
+						StartDate:
+					</label>
+					<input type="date" name="startdate" id="startdate" value="{{ user.StartDate }}" class="form-control w-50 mt-2" required>
+
+				</div>
+                <div class="form-group mt-2" style="margin-left:2px;">
+					<label for="enddate">
+						EndDate:
+					</label>
+					<input type="date" name="enddate" id ="enddate" value="" class="form-control w-50 mt-2" onchange="getDays()" required>
+
+				</div>
+
+                 <div class="form-group mt-2" style="margin-left:2px;display: none;" id ="start_time" >
+					<label for="start-time">Select StartTime:</label>
+                   <input type="time" name="start-time" id="start-time" class="form-control w-50 mt-2" >
+
+
+				</div>
+              <div class="form-group mt-2" style="margin-left:2px;display: none;" id ="end_time" >
+					<label for="end-time">Select EndTime:</label>
+                    <input type="time" name="end-time" id="end-time" class="form-control w-50 mt-2"    >
+
+			  </div>
+
+				 <div class="form-group mt-2" style="margin-left:2px;display: none;" id ="time_duration" >
+					<label for="duration">Duration:</label>
+                    <input type="text" name="duration" id="duration" class="form-control w-50 mt-2" >
+				</div>
+             <div class="form-group mt-2" style="margin-left:2px;display: none;" id="location_v">
+					<label for="location">
+						Enter Location:
+					</label>
+					<input type="text"
+						name="location"
+						id="location"
+                            value=""
+						class="form-control w-50 mt-2">
+
+
+             </div>
+                    <div class="form-group mt-2" style="margin-left:2px;">
+					<label for="reason">
+						Reason:
+					</label>
+					<input type="text"
+						name="reason"
+						id="reason"
+                            value="{{ user.reason }}"
+						class="form-control w-50 mt-2">
+
+				</div>
+<button type="submit" class="btn btn-primary btn-lg text-center mt-3 ml-5" style="margin-left:15px;">Request For permission</button>
+		 </div>
+
+    </form>
+
+
+          </div>
+        </div>
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $("#permissioncategory").change(function (e) {
+    if ($(this).val() == "Early Login") {
+        $("#location_v").hide();
+        $("#start_time").show();
+        $("#end_time").show();
+        $("#time_duration").show()
+    }
+
+     else if ($(this).val() == "Early Logout") {
+        $("#location_v").hide();
+        $("#start_time").show();
+        $("#end_time").show();
+        $("#time_duration").show()
+    }
+
+     else if ($(this).val() == "Late Login") {
+        $("#location_v").hide();
+        $("#start_time").show();
+        $("#end_time").show();
+        $("#time_duration").show()
+    }
+      else if ($(this).val() == "Late Logout") {
+        $("#location_v").hide();
+        $("#start_time").show();
+        $("#end_time").show();
+        $("#time_duration").show()
+    }
+     else if ($(this).val() == "WFH") {
+
+        $("#start_time").hide();
+        $("#end_time").hide();
+         $("#time_duration").show()
+        $("#location_v").show();
+    }
+});
+</script>
+
+<script>
+  // Get the input elements
+  var startTimeInput = document.getElementById('start-time');
+  var endTimeInput = document.getElementById('end-time');
+  var durationInput = document.getElementById('duration');
+
+  // Add event listener to calculate duration when the time inputs change
+  startTimeInput.addEventListener('change', calculateDuration);
+  endTimeInput.addEventListener('change', calculateDuration);
+
+  // Function to calculate the duration
+  function calculateDuration() {
+    var startTime = startTimeInput.value; // Get the start time value
+    var endTime = endTimeInput.value; // Get the end time value
+
+    // Convert the time strings to Date objects
+    var startDate = new Date('1970-01-01T' + startTime);
+    var endDate = new Date('1970-01-01T' + endTime);
+
+    // Calculate the time difference in milliseconds
+    var duration = endDate - startDate;
+
+    // Convert the duration to hours and minutes
+    var hours = Math.floor(duration / (1000 * 60 * 60));
+    var minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
+
+    // Format the duration as HH:MM
+    var formattedDuration = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+
+    // Update the duration input value
+    durationInput.value = formattedDuration;
+  }
+</script>
+
+
+<script>
+
+//get the days between two dates
+
+  function getDays(){
+
+ const startDate= new Date(document.getElementById('startdate').value);
+   const endDate = new Date(document.getElementById('enddate').value);
+   const firstHalfCheckbox = document.getElementById('first-half');
+const secondHalfCheckbox = document.getElementById('second-half');
+    //Here we will use getTime() function to get the time difference
+   // var time_difference = end_date.getTime() - start_date.getTime();
+    //Here we will divide the above time difference by the no of miliseconds in a day
+  //  var days_difference = time_difference / (1000*3600*24);
+    //alert(days);
+
+    const durationInDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+
+
+     document.getElementById('duration').value = durationInDays+1;
+
+
+  }
+</script>
+
+
+
+
+</body>
+
+
+{%endblock%}

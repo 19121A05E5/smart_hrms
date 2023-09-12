@@ -1,0 +1,293 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+ <head xmlns="http://www.w3.org/1999/html">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Button Notification Badge</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+
+</head>
+
+
+
+  <main id="main" class="main">
+    {% if user.is_authenticated %}
+
+      {%if user.is_manager == True %}
+         <h4 style="color:pink"><b>Welcome  To Manager</b></h4>
+      {%else%}
+       <h4 style="color:pink"><b>Welcome  To  NotHR</b></h4>
+      {%endif%}
+      {%endif%}
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Left side columns -->
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-12 col-xl-12 col-xxl-12">
+          <div class="row">
+
+            <!-- Sales Card -->
+           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3 col-xl-3 col-xxl-3">
+              <div class="card info-card sales-card">
+
+
+
+                <div class="card-body">
+                  <h5 class="card-title" style="color:Violet;">Total Employees </h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                     <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>50</h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End Sales Card -->
+
+            <!-- Revenue Card -->
+             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3 col-xl-3 col-xxl-3">
+               <div class="card info-card revenue-card">
+
+
+
+                <div class="card-body">
+                  <h5 class="card-title" style="color:DodgerBlue;">Total Departments </h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class='far fa-building'></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>6</h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+             </div>
+           <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3 col-xl-3 col-xxl-3">
+               <div class="card info-card revenue-card">
+
+
+
+                <div class="card-body">
+                  <h5 class="card-title" style="color:DodgerBlue;">Total Devlopers</h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                <i class='far fa-building'></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>6</h6>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+             </div>
+       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-3 col-xl-3 col-xxl-3">
+  <div class="card info-card customers-card">
+
+
+
+                <div class="card-body">
+                  <h5 class="card-title" style="color:MediumSeaGreen;"> Total Testers</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+
+                    </div>
+                    <div class="ps-3">
+                      <h6>5</h6>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+  </div>
+
+        </div>
+         
+
+
+
+            </div>
+          </div>
+
+
+
+            </div>
+
+
+
+            </div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['DOTNET',     11],
+          ['SQL',      3],
+          ['Android',  4],
+          ['Sales', 5],
+          ['BA',    2]
+
+
+        ]);
+
+        var options = {
+          title: 'Total Employes Department wise'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 500px; height: 400px;"></div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="row">
+          <div class="col-lg-9">
+            <div class="chart">
+              <canvas id="myChart" aria-label="Site statistics" role="img"></canvas>
+            </div>
+            <div class="users-table table-wrapper">
+
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <article class="customers-wrapper">
+              <canvas id="customersChart" aria-label="Customers statistics" role="img"></canvas>
+              <!--              <p class="customers__title">New Customers <span>+958</span></p>
+              <p class="customers__date">28 Daily Avg.</p>
+              <picture><source srcset="./img/svg/customers.svg" type="image/webp"><img src="./img/svg/customers.svg" alt=""></picture> -->
+            </article>
+
+          </div>
+        </div>
+      </div>
+
+            <div id="calendar"></div>
+
+
+
+</section>
+  </main><!-- End #main -->
+
+
+ <script>
+
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        // Custom options and settings go here
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        defaultView: 'month',
+        events: [
+          {
+            title: 'Event 1',
+            start: '2023-07-26'
+          },
+          {
+            title: 'Event 2',
+            start: '2023-07-28'
+          }
+        ],
+        // Use the dayRender callback to customize the appearance of each day cell
+        dayRender: function (date, cell) {
+          var day = date.day();
+          // 0 is Sunday, 6 is Saturday
+          if (day === 0 || day === 6) {
+            cell.css('background-color', '	#f9aeae');
+          }
+        }
+      });
+    });
+  </script>
+
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+

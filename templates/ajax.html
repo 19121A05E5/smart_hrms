@@ -1,0 +1,192 @@
+edit:
+<form id="post-form">
+  {%csrf_token%}
+  <label>
+    name
+  </label>
+  <input type="text" id="name" name="name" value="name"/>
+  <label>
+    email
+  </label>
+  <input type="text" id="email" name="email" value="email"/>
+  <input type="submit" value="submit"/>
+</form>
+
+
+<form id="post-form1">
+  {%csrf_token%}
+  <label>
+    name
+  </label>
+  <input type="text" id="name" name="name" value="name"/>
+  <label>
+    email
+  </label>
+  <input type="text" id="email" name="email" value="email"/>
+
+</form>
+
+{%for i1 in k%}
+{{i1.id}}
+{{i1.name}}
+
+{{i1.email}}
+   <button class="get-btn" id="el" data-id="{{i1.id}}">Get</button>
+            <button class="update-btn" data-id="{{i1.id }}">Update</button>
+            <button class="delete-btn" data-id="{{i1.id }}">Delete</button><br>
+
+{%endfor%}
+
+
+
+ <h2>Item Details</h2>
+<div id="item-details">
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+       $(".get-btn").click(function() {
+                var item_id = $(this).data('id');
+                console.log(item_id)
+                $.ajax({
+
+                    url: '/get/'+item_id+'/',
+                    type: 'GET',
+
+                    success: function(data) {
+                    alert('Data Successfully get');
+                        $("#item-details").html(`<p>Name: ${data.name}</p>`);
+                    }
+                });
+            });
+
+            // Similar AJAX code for update and delete buttons
+        });
+  </script>
+
+<!--
+<script type="text/javascript" >
+$(document).ready(function(){
+$('#post-form').on('submit', function(e){
+    e.preventDefault();
+
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'create' %}",
+      data: {
+        name: $('#name').val(),
+        email: $('#email').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+      },
+
+      success:function(data) {
+         $('#profile').html(data.message);
+         alert('Data Successfully Posted');
+
+      },
+    });
+    });
+  });
+</script>
+
+
+<script>
+  $(document).ready(function() {
+    $('.update-button').on('click', function() {
+        var dataId = $(this).data('id');  // Get the data ID from the button's data attribute
+        consol.log(dataId)
+        // Perform a GET request to retrieve data for the specified ID
+        $.ajax({
+            type: 'POST',
+            url: "http://127.0.0.1:8000/update_p/${dataId}/",  // Update with your view URL to retrieve data
+            dataType: 'json',
+            success: function(data) {
+                // Populate the form fields with the retrieved data
+                $('#name').val(data.name);
+                $('#email').val(data.email);
+
+                // Update the form action to include the data ID for the update
+                $('#post-form').attr('action', `/update_data/${dataId}/`);
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+
+});
+
+</script>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+  $(document).on('click', '#get-data', function(e) {
+    $.ajax({
+      type: 'GET',
+      url: "{% url 'my_get_view' %}",
+      success: function(data) {
+        console.log(data); // Display the retrieved data in the browser console
+        updateData(data);
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error); // Display any errors in the browser console
+        $('h2').html('Error occurred while retrieving data. Check the browser console for details.');
+      }
+    });
+  });
+
+  function updateData(data) {
+    const dataContainer = $('#data-container');
+    dataContainer.empty(); // Clear previous data (if any)
+
+    data.forEach(function(item) {
+      const newData = `<p>Name: ${item.name}, Email: ${item.email}</p>`;
+      dataContainer.append(newData);
+    });
+
+    $('h2').html('Data retrieved successfully and displayed below:');
+  }
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $.ajax({
+      type: 'GET',
+      url: "{% url 'my_get_view' %}",
+      success: function(data) {
+        console.log(data); // Display the retrieved data in the browser console
+        updateData(data);
+      },
+      error: function(xhr, status, error) {
+        console.error('Error:', error); // Display any errors in the browser console
+        $('h2').html('Error occurred while retrieving data. Check the browser console for details.');
+      }
+    });
+  });
+
+  function updateData(data) {
+    const dataContainer = $('#data-container');
+    dataContainer.empty(); // Clear previous data (if any)
+
+    data.forEach(function(item) {
+      const newData = `<p>id:${item.id},Name: ${item.name}, Email: ${item.email}, Age: ${item.age}</p>`;
+      dataContainer.append(newData);
+    });
+
+    $('h2').html('Data retrieved successfully and displayed below:');
+  }
+
+</script>-->
+
+
+
+
+

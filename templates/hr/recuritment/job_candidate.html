@@ -1,0 +1,666 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke; height:800px; padding-top: 50px; padding-right: 1px; padding-bottom: 50px; padding-left: 50px;" >
+
+
+
+
+
+
+
+<div class="col-xl-12">
+    <div class="tab-content" id="v-pills-tabContent">
+
+
+
+                         <div class="tab-pane fade show active" id="v-pills-JobCandidate" role="tabpanel" aria-labelledby="v-pills-JobCandidate-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+                         <h3 style="color:#1E7CCF ;"><b>Job candidate</b></h3>
+                         <hr>
+
+
+
+
+
+                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#job_candidate">
+                                             Add Job Candidate Info
+                                           </button><p></p>
+
+                                           <div class="table-responsive">
+                                           <table id="job_candidate-table" class="table ">
+                                           <thead>
+                                           <tr>
+                                           <th>Job Title</th>
+                                           <th>Candidate Name</th>
+                                           <th>Candidate Email</th>
+                                           <th>Resume</th>
+                                           <th>Status</th>
+                                           <th>Applied Date</th>
+                                           <th class="not-exported">action</th>
+                                           </tr>
+                                           </thead>
+
+
+
+
+      <tbody>
+                      {%for job_candidate in data38%}
+
+
+
+                          <tr>
+                          <td>{{job_candidate.job_title.job_title}}
+
+                          </td>
+                           <td>{{job_candidate.candidate_name}}
+
+                          </td>
+                              <td>{{job_candidate.candidate_email}}
+
+                          </td>
+                          <td>
+                              <a href="{{job_candidate.resume.url}}" download >Resume</a>
+                          </td>
+
+                           <td>{{job_candidate.status}}
+
+                          </td>
+                               <td>{{job_candidate.apply_date}}
+
+                          </td>
+
+
+
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_job_candidate" data-record-id="{{job_candidate.id}}" value="{{job_candidate.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_job_candidate" data-record-id="{{job_candidate.id}}" value="{{job_candidate.id}}" style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+
+                                           </table>
+                                           </div>
+
+
+
+
+                                           <div class="modal fade modal-dialog modal-lg modal-dialog-centered" id="job_candidate"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                               <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Job Post</h1>
+                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                 </div>
+                                                 <div class="modal-body">
+
+                                                   <form method="job_candidate_code" id="job_candidate_sample_form" class="form-horizontal" autocomplete="off">
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+
+                                                    <div class="col-md-6 form-group">
+    <label>Job Title<span class="star">*</span></label>
+    <select id="job_title" name="job title" class="form-control" required>
+      <option value="" disabled selected>Job title</option>
+        {% for i6 in data37 %}
+            <option value="{{ i6.id }}">{{ i6.job_title }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="job_title-error"></span>
+    </div>
+
+                                               <div class="col-md-6 form-group">
+                                                 <label>Candidate Name<span class="star">*</span></label>
+                                                 <input type="text" name="candidate name" id="candidate_name" placeholder="Candidate Name" title="" required="" class="form-control">
+                                               </div>
+
+
+                                                       <div class="col-md-6 form-group">
+                                                 <label>Candidate Email<span class="star">*</span></label>
+                                                 <input type="text" name="candidate email" id="candidate_email" placeholder="Candidate Email" title="" required="" class="form-control">
+                                               </div>
+
+
+
+  <div class="col-md-6 form-group">
+                          <label>Resume<span class="star">*</span></label>
+                          <input type="file" name="resume" id="resume" class="form-control">
+                          <span id="stored_job_candidate_document"></span>
+                          </div><br>
+
+
+                                                       <div class="col-md-6 form-group">
+                                                 <label>Status</label>
+                                                 <input type="text" name="status" id="status" placeholder="Status" title="" class="form-control">
+                                               </div>
+
+
+
+                                                        <div class="col-md-6 form-group">
+                                                 <label>Applied Date<span class="star">*</span></label>
+                                                 <input type="date" name="applied date" id="applied_date" placeholder="Applied Date" title="" required="" class="form-control">
+                                               </div>
+
+
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="job_candidate_action">
+                                                 <input type="hidden" name="hidden_id" id="job_candidate_hidden_id">
+                                                 <input type="submit" name="action_button" id="job_candidate_action_button" class="btn btn-warning" value="Add">
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                     </div>
+                                               </div>
+                                             </div>
+                                           </div>
+                                           </div>
+
+
+
+
+                            <div class="modal fade" id="update_job_candidate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+                          <form method="job_candidate_code" id="job_candidate_sample_form_upd" class="form-horizontal" autocomplete="off">
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+<div class="col-md-6 form-group">
+    <label>Job Title<span class="star">*</span></label>
+    <select id="job_title_upd" name="job title" class="form-control" required>
+      <option value="" disabled selected>Job title</option>
+        {% for i6 in data37 %}
+            <option value="{{ i6.id }}">{{ i6.job_title }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="job_title_upd-error"></span>
+    </div>
+
+                                               <div class="col-md-6 form-group">
+                                                 <label>Candidate Name<span class="star">*</span></label>
+                                                 <input type="text" name="candidate name" id="candidate_name_upd" placeholder="Candidate Name" title="" required="" class="form-control">
+                                               </div>
+
+
+                                                       <div class="col-md-6 form-group">
+                                                 <label>Candidate Email<span class="star">*</span></label>
+                                                 <input type="text" name="candidate email" id="candidate_email_upd" placeholder="Candidate Email" title="" required="" class="form-control">
+                                               </div>
+
+
+
+  <div class="col-md-6 form-group">
+                          <label>Resume<span class="star">*</span></label>
+                          <input type="file" name="resume_upd" id="resume_upd" class="form-control">
+                          <span id="stored_job_candidate_document_upd"></span>
+                          </div><br>
+
+
+                                                       <div class="col-md-6 form-group">
+                                                 <label>Status</label>
+                                                 <input type="text" name="status" id="status_upd" placeholder="Status" title="" class="form-control">
+                                               </div>
+
+
+
+                                                        <div class="col-md-6 form-group">
+                                                 <label>Applied Date<span class="star">*</span></label>
+                                                 <input type="date" name="applied date" id="applied_date_upd" placeholder="Applied Date" title="" required="" class="form-control">
+                                               </div>
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="job_candidate_action_upd">
+                                                 <input type="hidden" name="hidden_id" id="job_candidate_id">
+                                                     <button type="submit" class="btn btn-primary">Update</button>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+
+
+
+
+            </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete_job_candidate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="job_candidate_delete_form">
+            {% csrf_token %}
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Job Candidate Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+                       </div></div>
+    </section>
+</main>
+
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+             $("#job_candidate_sample_form").submit(function(event) {
+                 event.preventDefault();
+
+                 var job_title = $("#job_title").val();
+                 var candidate_name = $("#candidate_name").val();
+                 var candidate_email = $("#candidate_email").val();
+                 var status = $("#status").val();
+                 var applied_date = $("#applied_date").val();
+
+
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+
+                      var form38Data = new FormData();
+                      form38Data.append('candidate_name', candidate_name);
+                      form38Data.append('job_title', job_title);
+                      form38Data.append('candidate_email', candidate_email);
+                      form38Data.append('status', status);
+                      form38Data.append('applied_date', applied_date);
+                      form38Data.append('resume', $('#resume')[0].files[0]);
+
+
+
+
+
+                        form38Data.append('data_id', data_id);
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'job_candidate' %}",
+
+                    data:form38Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#job_candidate-table');
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_job_candidate"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#job_candidate_id').val(recordId);
+  })
+
+
+         $("#job_candidate_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+
+               var job_title_upd = $("#job_title_upd").val();
+                 var candidate_name_upd = $("#candidate_name_upd").val();
+                 var candidate_email_upd = $("#candidate_email_upd").val();
+                 var status_upd = $("#status_upd").val();
+                 var applied_date_upd = $("#applied_date_upd").val();
+
+
+
+
+                  var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+                        var recordId = $('#job_candidate_id').val();
+
+                      var form38Data = new FormData();
+                      form38Data.append('candidate_name_upd', candidate_name_upd);
+                      form38Data.append('job_title_upd', job_title_upd);
+                      form38Data.append('candidate_email_upd', candidate_email_upd);
+                      form38Data.append('status_upd', status_upd);
+                      form38Data.append('applied_date_upd', applied_date_upd);
+                      form38Data.append('resume_upd', $('#resume_upd')[0].files[0]);
+
+
+
+
+                        form38Data.append('data_id', data_id);
+                           form38Data.append('job_candidate_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/update_job_candidate/",
+
+                    data:form38Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+<script>
+
+       $('[data-bs-target="#update_job_candidate"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/job_candidate_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#candidate_name_upd").val(response.candidate_name_upd);
+            $("#job_title_upd").val(response.job_title_upd);
+            $("#candidate_email_upd").val(response.candidate_email_upd);
+            $("#status_upd").val(response.status_upd);
+            $("#applied_date_upd").val(response.applied_date_upd);
+
+
+
+
+
+
+
+
+
+
+            $('#update_job_candidate').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching job candidate data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_job_candidate"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#job_candidate_id').val(recordId);
+  })
+
+
+         $("#job_candidate_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#job_candidate_id').val();
+
+
+                      var form38Data = new FormData();
+
+
+                           form38Data.append('job_candidate_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/delete_job_candidate/",
+
+                    data:form38Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+{%endblock%}

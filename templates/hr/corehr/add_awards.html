@@ -1,0 +1,738 @@
+
+ {%extends 'hr/base.html'%}
+
+{%block content%}
+
+
+
+
+
+
+
+
+  <head>
+
+        <title>samrt hrms</title>
+        <link rel="stylesheet"  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <style>
+
+
+
+       table{
+        border:1px solid black;
+        }
+        th{
+        border:1px solid black;
+        }
+        td{
+        border:1px solid black;
+        }
+
+        .nav-tabs li a {
+            padding: 0.75rem 1.25rem;
+        }
+
+        .nav-tabs.vertical li {
+            border: 1px solid #ddd;
+            display: block;
+            width: 100%
+        }
+
+.star{
+  color:red;
+}
+
+
+
+
+#general{
+  color: orange;
+}
+
+table{
+  border:1px solid black;
+   }
+   th{
+ border:1px solid black;
+   }
+ td{
+  border:1px solid black;
+  }
+
+
+
+
+
+
+
+
+
+    </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main id="main" class="main">
+
+
+    <section class="section profile">
+
+        <div class="col-xl-12 col-lg-4">
+
+          <div class="card" style="box-shadow:20px 20px 60px whitesmoke,-20px -20px 60px whitesmoke; height:800px; padding-top: 50px; padding-right: 1px; padding-bottom: 50px; padding-left: 50px;" >
+
+
+
+
+
+
+
+
+<div class="col-xl-12">
+                       <div class="tab-content" id="v-pills-tabContent">
+
+
+
+                         <div class="tab-pane fade show active" id="v-pills-Awards" role="tabpanel" aria-labelledby="v-pills-Awards-tab" tabindex="0" style=" padding-top: 10px; padding-right: 40px; padding-bottom: 50px; padding-left: 2px;">
+
+                          <h3 style="color:#1E7CCF ;"><b>Awards</b></h3>
+                         <hr>
+
+
+
+
+
+                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#awards">
+                                             Add Awards Info
+                                           </button><p></p>
+
+                                           <div class="table-responsive">
+                                           <table id="awards-table" class="table ">
+                                           <thead>
+                                           <tr>
+                                           <th>Award Name</th>
+                                           <th>Employee</th>
+                                           <th>Company</th>
+                                           <th>Department</th>
+                                           <th>Award Date</th>
+                                           <th class="not-exported">action</th>
+                                           </tr>
+                                           </thead>
+
+
+
+
+      <tbody>
+                      {%for awards in data23%}
+
+
+
+                          <tr>
+                          <td>{{awards.award_type}}
+
+                          </td>
+                           <td>{{awards.employee.username}}
+
+                          </td>
+                              <td>{{awards.company.name}}
+
+                          </td>
+                           <td>{{awards.department.department}}
+
+                          </td>
+                              <td>{{awards.award_date}}
+
+                          </td>
+
+
+
+                          <td>
+                                  <span class="p-relative">
+
+                     <!-- <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                          <div class="sr-only">More info</div>
+                              <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                        <ul class="users-item-dropdown dropdown">-->
+
+                          <button type="button" data-bs-toggle="modal" data-bs-target="#update_awards" data-record-id="{{awards.id}}" value="{{awards.id}}" style="
+    background-color: #1E7CCF;border-radius:5px;border:none;
+"><i class="fa fa-pencil-square-o" style="font-size:27px;color:#FFF;"></i></button>
+
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#delete_awards" data-record-id="{{awards.id}}" value="{{awards.id}}" style="background-color:red;border-radius:5px;border:none;"><i class="fa fa-trash" style="font-size:27px;color:#fff;"></i></button>
+
+
+                                   </span>
+                          </td>
+                      </tr>
+                      {%endfor%}
+                   </tbody>
+
+
+
+                                           </table>
+                                           </div>
+
+
+
+
+                                           <div class="modal fade modal-dialog modal-lg modal-dialog-centered" id="awards"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                               <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Awards</h1>
+                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                 </div>
+                                                 <div class="modal-body">
+
+                                                   <form method="post" id="awards_sample_form" class="form-horizontal" autocomplete="off">
+                                                       {% csrf_token %}
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+                                                  <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_awards" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country-error"></span>
+    </div>
+
+<div class="col-md-6 form-group">
+    <label>Department<span class="star">*</span></label>
+    <select id="department_awards" name="department" class="form-control" required>
+      <option value="" disabled selected>Department</option>
+           {% for i2 in data19 %}
+            <option value="{{ i2.id }}">{{ i2.department }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="department-error"></span>
+    </div>
+
+<div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_awards" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee-error"></span>
+    </div>
+
+
+
+                                                       <div class="col-md-6 form-group">
+                                <label>Award Type<span class="star">*</span></label>
+                                <select id="award_type_awards" name="award type" class="form-control" required>
+                                  <option value="" disabled selected>Award Type</option>
+                                   <option value="Performer of the Year">Performer of the Year</option>
+         <option value="Best Salesman">Best Salesman</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="award_type-error"></span>
+                                </div>
+
+
+                                                    <div class="col-md-6 form-group">
+                                               <label>Gift</label>
+                                               <input type="text" name="gift" id="gift_awards" placeholder="Gift" title="" class="form-control">
+                                             </div>
+                                                       <div class="col-md-6 form-group">
+                                               <label>Cash</label>
+                                               <input type="text" name="CAsh" id="cash_awards" placeholder="Cash" title="" class="form-control">
+                                             </div>
+
+
+                                               <div class="col-md-6 form-group">
+                                               <label>Award Information</label>
+                                               <input type="text" name="award information" id="award_information" placeholder="Award Information" title="" class="form-control">
+                                             </div>
+
+
+
+
+                                           <div class="col-md-6 form-group">
+                                           <label>Award Date<span class="star">*</span></label>
+                                           <input type="date" name="award date" id="award_date" placeholder="Award Date" title="" required="" class="form-control">
+                                         </div>
+
+
+
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="awards_action">
+                                                 <input type="hidden" name="hidden_id" id="awards_hidden_id">
+                                                 <input type="submit" name="action_button" id="awards_action_button" class="btn btn-warning" value="Add">
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+
+                                                    </form>
+
+
+
+
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                     </div>
+                                               </div>
+                                             </div>
+                                           </div>
+                                           </div>
+
+
+
+
+
+                             <div class="modal fade" id="update_awards" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_upd">Update</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+                                                   <form method="post" id="awards_sample_form_upd" class="form-horizontal" autocomplete="off">
+                                                       {% csrf_token %}
+
+                                                   <input type="hidden" name="_token" value="AbUR8GahIyj2UPK5OjVYJYkjmJC3lklimrYuSzHV">
+                                                   <div class="row">
+
+
+
+                                                  <div class="col-md-6 form-group">
+    <label>Company<span class="star">*</span></label>
+    <select id="company_awards_upd" name="company" class="form-control" required>
+      <option value="" disabled selected>Company</option>
+        {% for i1 in data22 %}
+            <option value="{{ i1.id }}">{{ i1.name }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="country_upd-error"></span>
+    </div>
+
+<div class="col-md-6 form-group">
+    <label>Department<span class="star">*</span></label>
+    <select id="department_awards_upd" name="department" class="form-control" required>
+      <option value="" disabled selected>Department</option>
+           {% for i2 in data19 %}
+            <option value="{{ i2.id }}">{{ i2.department }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="department_upd-error"></span>
+    </div>
+
+<div class="col-md-6 form-group">
+    <label>Employee<span class="star">*</span></label>
+    <select id="employee_awards_upd" name="employee" class="form-control" required>
+      <option value="" disabled selected>Employee</option>
+           {% for i in data1 %}
+            <option value="{{ i.id }}">{{ i.username }}</option>
+        {% endfor %}
+    </select>
+    <span style="color:red"  class="error-message" id="employee_upd-error"></span>
+    </div>
+
+
+
+                                                       <div class="col-md-6 form-group">
+                                <label>Award Type<span class="star">*</span></label>
+                                <select id="award_type_awards_upd" name="award type" class="form-control" required>
+                                  <option value="" disabled selected>Award Type</option>
+                                   <option value="Performer of the Year">Performer of the Year</option>
+         <option value="Best Salesman">Best Salesman</option>
+
+                                </select>
+                                <span style="color:red"  class="error-message" id="award_type_upd-error"></span>
+                                </div>
+
+
+                                                    <div class="col-md-6 form-group">
+                                               <label>Gift</label>
+                                               <input type="text" name="gift" id="gift_awards_upd" placeholder="Gift" title="" class="form-control">
+                                             </div>
+                                                       <div class="col-md-6 form-group">
+                                               <label>Cash</label>
+                                               <input type="text" name="CAsh" id="cash_awards_upd" placeholder="Cash" title="" class="form-control">
+                                             </div>
+
+
+                                               <div class="col-md-6 form-group">
+                                               <label>Award Information</label>
+                                               <input type="text" name="award information" id="award_information_upd" placeholder="Award Information" title="" class="form-control">
+                                             </div>
+
+
+
+
+                                           <div class="col-md-6 form-group">
+                                           <label>Award Date<span class="star">*</span></label>
+                                           <input type="date" name="award date" id="award_date_upd" placeholder="Award Date" title="" required="" class="form-control">
+                                         </div>
+
+
+
+
+
+
+                                                 <div class="container">
+                                                 <div class="form-group" align="center">
+                                                 <input type="hidden" name="action" id="awards_action_upd">
+                                                 <input type="hidden" name="hidden_id" id="awards_id">
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                 </div>
+                                                 </div>
+                                                 </div>
+
+                                                 </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+                           <div class="modal fade" id="delete_awards" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form method="post" id="awards_delete_form">
+            {% csrf_token %}
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel_del">Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <h3> Are you sure you want to delete the Awards Data ?</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+                       </div>
+</div>
+          </div>
+        </div>
+    </section>
+</main>
+
+
+
+<script>
+
+        $(document).ready(function() {
+
+
+             $("#awards_sample_form").submit(function(event) {
+                 event.preventDefault();
+
+                 var company_awards = $("#company_awards").val();
+                 var department_awards = $("#department_awards").val();
+                 var employee_awards = $("#employee_awards").val();
+                 var award_type_awards = $("#award_type_awards").val();
+                 var gift_awards = $("#gift_awards").val();
+                 var cash_awards = $("#cash_awards").val();
+                 var award_information = $("#award_information").val();
+                 var award_date = $("#award_date").val();
+
+
+
+
+                    var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+                    var data_id = $("#data_id").val();
+
+                      var form23Data = new FormData();
+                      form23Data.append('company_awards', company_awards);
+                      form23Data.append('department_awards', department_awards);
+                      form23Data.append('employee_awards', employee_awards);
+                      form23Data.append('award_type_awards', award_type_awards);
+                      form23Data.append('gift_awards', gift_awards);
+                      form23Data.append('cash_awards', cash_awards);
+                      form23Data.append('award_information', award_information);
+                      form23Data.append('award_date', award_date);
+
+
+
+
+
+                        form23Data.append('data_id', data_id);
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "{% url 'awards' %}",
+
+                    data:form23Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+        });
+
+  </script>
+
+
+ <script>
+     new DataTable('#awards-table');
+ </script>
+
+
+
+<script>
+   $(document).ready(function() {
+           $('[data-bs-target="#update_awards"]').on('click', function() {
+           const recordId = $(this).data('record-id');
+            $('#awards_id').val(recordId);
+  })
+
+
+         $("#awards_sample_form_upd").submit(function(event) {
+                event.preventDefault();
+                var company_awards_upd = $("#company_awards_upd").val();
+                var department_awards_upd = $("#department_awards_upd").val();
+                var employee_awards_upd  = $("#employee_awards_upd ").val();
+                var award_type_awards_upd = $("#award_type_awards_upd").val();
+                var gift_awards_upd = $("#gift_awards_upd").val();
+                var cash_awards_upd = $("#cash_awards_upd").val();
+                var award_information_upd = $("#award_information_upd").val();
+                var award_date_upd = $("#award_date_upd").val();
+
+
+
+
+
+                  var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+                        var recordId = $('#awards_id').val();
+
+                      var form23Data = new FormData();
+                      form23Data.append('company_awards_upd', company_awards_upd);
+                      form23Data.append('department_awards_upd', department_awards_upd);
+                        form23Data.append('employee_awards_upd', employee_awards_upd);
+                        form23Data.append('award_type_awards_upd', award_type_awards_upd);
+                        form23Data.append('gift_awards_upd', gift_awards_upd);
+                        form23Data.append('cash_awards_upd', cash_awards_upd);
+                         form23Data.append('award_information_upd', award_information_upd);
+                      form23Data.append('award_date_upd', award_date_upd);
+
+
+
+
+                           form23Data.append('awards_id', recordId );
+
+
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/update_awards/",
+
+                    data:form23Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  updated successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+<script>
+
+       $('[data-bs-target="#update_awards"]').on('click', function() {
+          const recordId = $(this).data('record-id');
+
+
+    // Make an AJAX request to fetch the existing data for the record
+    $.ajax({
+        type: "GET",
+        url: "/awards_get/" + recordId+"/", // Replace with your URL for fetching data
+        success: function(response) {
+
+            // Populate the form fields with the existing data
+            $("#company_awards_upd").val(response.company_awards_upd);
+            $("#department_awards_upd").val(response.department_awards_upd);
+            $("#employee_awards_upd").val(response.employee_awards_upd);
+            $("#award_type_awards_upd").val(response.award_type_awards_upd);
+            $("#gift_awards_upd").val(response.gift_awards_upd);
+            $("#cash_awards_upd").val(response.cash_awards_upd);
+            $("#award_information_upd").val(response.award_information_upd);
+            $("#award_date_upd").val(response.award_date_upd);
+
+
+
+
+
+
+            $('#update_awards').modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching awards data:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+<script>
+$(document).ready(function() {
+           $('[data-bs-target="#delete_awards"]').on('click', function() {
+    const recordId = $(this).data('record-id');
+    $('#awards_id').val(recordId);
+  })
+
+
+         $("#awards_delete_form").submit(function(event) {
+                event.preventDefault();
+
+                        var recordId = $('#awards_id').val();
+
+
+                      var form23Data = new FormData();
+
+
+                           form23Data.append('awards_id', recordId );
+
+
+            // Append file input to FormData
+
+                      var csrfToken = $("input[name='csrfmiddlewaretoken']").val();
+
+
+
+
+                 $.ajax({
+                    type: "POST",
+                    url: "/delete_awards/",
+
+                    data:form23Data,
+                     processData: false,  // Prevent jQuery from processing data
+                     contentType: false,
+                     headers: {
+                      "X-CSRFToken": csrfToken
+                      },
+                    success: function(response) {
+                    console.log(response.first_name)
+                       alert("data is  delete successfully:");  // Display response message
+                    },
+                    error: function(xhr, status, error) {
+                       console.error("Error updating item:", error);
+                    }
+                });
+            });
+
+
+        });
+
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
